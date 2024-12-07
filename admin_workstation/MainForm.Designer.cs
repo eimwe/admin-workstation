@@ -30,7 +30,13 @@
         {
             tabControlTables = new TabControl();
             tabPageClients = new TabPage();
+            btnDeleteClient = new Button();
+            btnUpdateClient = new Button();
+            btnAddClient = new Button();
+            dataGridView1 = new DataGridView();
             tabControlTables.SuspendLayout();
+            tabPageClients.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // tabControlTables
@@ -47,6 +53,10 @@
             // 
             // tabPageClients
             // 
+            tabPageClients.Controls.Add(dataGridView1);
+            tabPageClients.Controls.Add(btnAddClient);
+            tabPageClients.Controls.Add(btnUpdateClient);
+            tabPageClients.Controls.Add(btnDeleteClient);
             tabPageClients.Location = new Point(4, 30);
             tabPageClients.Name = "tabPageClients";
             tabPageClients.Padding = new Padding(3);
@@ -54,6 +64,56 @@
             tabPageClients.TabIndex = 0;
             tabPageClients.Text = "Clients";
             tabPageClients.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteClient
+            // 
+            btnDeleteClient.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnDeleteClient.AutoSize = true;
+            btnDeleteClient.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeleteClient.Location = new Point(678, 6);
+            btnDeleteClient.Name = "btnDeleteClient";
+            btnDeleteClient.Size = new Size(84, 25);
+            btnDeleteClient.TabIndex = 0;
+            btnDeleteClient.Text = "Delete Client";
+            btnDeleteClient.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateClient
+            // 
+            btnUpdateClient.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnUpdateClient.AutoSize = true;
+            btnUpdateClient.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnUpdateClient.Location = new Point(583, 6);
+            btnUpdateClient.Name = "btnUpdateClient";
+            btnUpdateClient.Size = new Size(89, 25);
+            btnUpdateClient.TabIndex = 0;
+            btnUpdateClient.Text = "Update Client";
+            btnUpdateClient.UseVisualStyleBackColor = true;
+            // 
+            // btnAddClient
+            // 
+            btnAddClient.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAddClient.AutoSize = true;
+            btnAddClient.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAddClient.Location = new Point(488, 6);
+            btnAddClient.Name = "btnAddClient";
+            btnAddClient.Size = new Size(89, 25);
+            btnAddClient.TabIndex = 0;
+            btnAddClient.Text = "Add Client";
+            btnAddClient.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(6, 37);
+            dataGridView1.MultiSelect = false;
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(756, 349);
+            dataGridView1.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -64,6 +124,9 @@
             Name = "MainForm";
             Text = "Language Center Admin Workstation";
             tabControlTables.ResumeLayout(false);
+            tabPageClients.ResumeLayout(false);
+            tabPageClients.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -71,5 +134,9 @@
 
         private TabControl tabControlTables;
         private TabPage tabPageClients;
+        private DataGridView dataGridView1;
+        private Button btnAddClient;
+        private Button btnUpdateClient;
+        private Button btnDeleteClient;
     }
 }
