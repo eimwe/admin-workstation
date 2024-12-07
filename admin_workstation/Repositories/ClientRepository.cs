@@ -86,5 +86,33 @@ namespace admin_workstation.Repositories
 
             return null;
         }
+
+        public void CreateClient(Client client)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "INSERT INTO clients " +
+                                 "(firstname, lastname, birthdate, phone) VALUES " +
+                                 "(@firstname, @lastname, @birthdate, @phone);";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@firstname", client.firstName);
+                        command.Parameters.AddWithValue("@lastname", client.lastName);
+                        command.Parameters.AddWithValue("@birthdate", client.birthDate);
+                        command.Parameters.AddWithValue("@phone", client.phone);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+        }
     }
 }
