@@ -1,0 +1,53 @@
+﻿using admin_workstation.Models;
+using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace admin_workstation.Repositories
+{
+    public class ClientRepository
+    {
+        private readonly string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=lang-center-db;Integrated Security=True;Trust Server Certificate=True";
+
+        public List<Client> GetClients()
+        {
+            var clients = new List<Client>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string sql = "SELECT * FROM clients ORDER BY id DESC";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Client client = new Client();
+                                client.id = reader.GetInt32(0);
+                                client.firstName = reader.GetString(1);
+                                client.lastName = reader.GetString(2);
+                                client.birthDate = reader.GetString(3).ToString();
+                                client.phone = reader.GetString(4);
+
+                                clients.Add(client);
+                            }
+                        }
+                    }
+                }
+
+            } catch(Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+
+            return clients;
+        }
+    }
+}
