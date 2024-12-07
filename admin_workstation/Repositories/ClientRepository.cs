@@ -114,5 +114,34 @@ namespace admin_workstation.Repositories
                 Console.WriteLine("Exception: " + ex.ToString());
             }
         }
+
+        public void UpdateClient(Client client)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "UPDATE clients " +
+                                 "SET firstname=@firstname, lastname=@lastname, " +
+                                 "birthdate=@birthdate, phone=@phone " +
+                                 "WHERE id=@id";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@firstname", client.firstName);
+                        command.Parameters.AddWithValue("@lastname", client.lastName);
+                        command.Parameters.AddWithValue("@birthdate", client.birthDate);
+                        command.Parameters.AddWithValue("@phone", client.phone);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+        }
     }
 }
