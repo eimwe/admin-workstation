@@ -10,7 +10,7 @@ namespace admin_workstation.Repositories
 {
     public class ClientRepository
     {
-        private readonly string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=lang-center-db;Integrated Security=True;Trust Server Certificate=True";
+        private readonly string connectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=lang-center;Integrated Security=True;Trust Server Certificate=True";
 
         public List<Client> GetClients()
         {
@@ -33,7 +33,7 @@ namespace admin_workstation.Repositories
                                 client.id = reader.GetInt32(0);
                                 client.firstName = reader.GetString(1);
                                 client.lastName = reader.GetString(2);
-                                client.birthDate = reader.GetString(3).ToString();
+                                client.birthDate = reader.GetString(3);
                                 client.phone = reader.GetString(4);
 
                                 clients.Add(client);
@@ -69,7 +69,7 @@ namespace admin_workstation.Repositories
                                 client.id = reader.GetInt32(0);
                                 client.firstName = reader.GetString(1);
                                 client.lastName = reader.GetString(2);
-                                client.birthDate = reader.GetString(3).ToString();
+                                client.birthDate = reader.GetString(3);
                                 client.phone = reader.GetString(4);
 
                                 return client;
