@@ -49,5 +49,42 @@ namespace admin_workstation.Repositories
 
             return clients;
         }
+
+        public Client? GetClient(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM clients WHERE id=@id";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Client client = new Client();
+                                client.id = reader.GetInt32(0);
+                                client.firstName = reader.GetString(1);
+                                client.lastName = reader.GetString(2);
+                                client.birthDate = reader.GetString(3).ToString();
+                                client.phone = reader.GetString(4);
+
+                                return client;
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+
+            return null;
+        }
     }
 }
