@@ -39,5 +39,14 @@ namespace admin_workstation
 
             this.dataGridViewClients.DataSource = dataTable;
         }
+
+        private void btnCreateClient_Click(object sender, EventArgs e)
+        {
+            CreateUpdateForm form = new CreateUpdateForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ReadClients();
+            }
+        }
     }
 }

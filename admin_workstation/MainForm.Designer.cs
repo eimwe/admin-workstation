@@ -31,7 +31,7 @@
             tabControlTables = new TabControl();
             tabPageClients = new TabPage();
             dataGridViewClients = new DataGridView();
-            btnAddClient = new Button();
+            btnCreateClient = new Button();
             btnUpdateClient = new Button();
             btnDeleteClient = new Button();
             tabControlTables.SuspendLayout();
@@ -54,7 +54,7 @@
             // tabPageClients
             // 
             tabPageClients.Controls.Add(dataGridViewClients);
-            tabPageClients.Controls.Add(btnAddClient);
+            tabPageClients.Controls.Add(btnCreateClient);
             tabPageClients.Controls.Add(btnUpdateClient);
             tabPageClients.Controls.Add(btnDeleteClient);
             tabPageClients.Location = new Point(4, 30);
@@ -79,17 +79,18 @@
             dataGridViewClients.Size = new Size(756, 331);
             dataGridViewClients.TabIndex = 1;
             // 
-            // btnAddClient
+            // btnCreateClient
             // 
-            btnAddClient.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAddClient.AutoSize = true;
-            btnAddClient.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAddClient.Location = new Point(488, 6);
-            btnAddClient.Name = "btnAddClient";
-            btnAddClient.Size = new Size(89, 25);
-            btnAddClient.TabIndex = 0;
-            btnAddClient.Text = "Add Client";
-            btnAddClient.UseVisualStyleBackColor = true;
+            btnCreateClient.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCreateClient.AutoSize = true;
+            btnCreateClient.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCreateClient.Location = new Point(488, 6);
+            btnCreateClient.Name = "btnCreateClient";
+            btnCreateClient.Size = new Size(89, 25);
+            btnCreateClient.TabIndex = 0;
+            btnCreateClient.Text = "Create Client";
+            btnCreateClient.UseVisualStyleBackColor = true;
+            btnCreateClient.Click += btnCreateClient_Click;
             // 
             // btnUpdateClient
             // 
@@ -135,7 +136,7 @@
         private TabControl tabControlTables;
         private TabPage tabPageClients;
         private DataGridView dataGridViewClients;
-        private Button btnAddClient;
+        private Button btnCreateClient;
         private Button btnUpdateClient;
         private Button btnDeleteClient;
     }
