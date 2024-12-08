@@ -81,7 +81,7 @@
             btnSave.Location = new Point(354, 243);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 23);
-            btnSave.TabIndex = 14;
+            btnSave.TabIndex = 5;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
@@ -91,7 +91,7 @@
             btnCancel.Location = new Point(435, 243);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 23);
-            btnCancel.TabIndex = 14;
+            btnCancel.TabIndex = 6;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
@@ -101,28 +101,29 @@
             textBoxClientPhone.Location = new Point(132, 179);
             textBoxClientPhone.Name = "textBoxClientPhone";
             textBoxClientPhone.Size = new Size(378, 23);
-            textBoxClientPhone.TabIndex = 10;
+            textBoxClientPhone.TabIndex = 4;
             // 
             // textBoxClientBirthDate
             // 
             textBoxClientBirthDate.Location = new Point(132, 140);
             textBoxClientBirthDate.Name = "textBoxClientBirthDate";
             textBoxClientBirthDate.Size = new Size(378, 23);
-            textBoxClientBirthDate.TabIndex = 11;
+            textBoxClientBirthDate.TabIndex = 3;
             // 
             // textBoxClientLastName
             // 
             textBoxClientLastName.Location = new Point(132, 100);
             textBoxClientLastName.Name = "textBoxClientLastName";
             textBoxClientLastName.Size = new Size(378, 23);
-            textBoxClientLastName.TabIndex = 12;
+            textBoxClientLastName.TabIndex = 2;
             // 
             // textBoxClientFirstName
             // 
+            textBoxClientFirstName.ImeMode = ImeMode.NoControl;
             textBoxClientFirstName.Location = new Point(132, 63);
             textBoxClientFirstName.Name = "textBoxClientFirstName";
             textBoxClientFirstName.Size = new Size(378, 23);
-            textBoxClientFirstName.TabIndex = 13;
+            textBoxClientFirstName.TabIndex = 1;
             // 
             // label6
             // 
