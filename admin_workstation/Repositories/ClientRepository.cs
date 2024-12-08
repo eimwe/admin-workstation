@@ -128,6 +128,7 @@ namespace admin_workstation.Repositories
                                  "WHERE id=@id";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
+                        command.Parameters.AddWithValue("@id", client.id);
                         command.Parameters.AddWithValue("@firstname", client.firstName);
                         command.Parameters.AddWithValue("@lastname", client.lastName);
                         command.Parameters.AddWithValue("@birthdate", client.birthDate);
