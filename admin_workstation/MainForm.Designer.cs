@@ -103,6 +103,7 @@
             btnUpdateClient.TabIndex = 0;
             btnUpdateClient.Text = "Update Client";
             btnUpdateClient.UseVisualStyleBackColor = true;
+            btnUpdateClient.Click += btnUpdateClient_Click;
             // 
             // btnDeleteClient
             // 

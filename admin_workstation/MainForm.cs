@@ -48,5 +48,25 @@ namespace admin_workstation
                 ReadClients();
             }
         }
+
+        private void btnUpdateClient_Click(object sender, EventArgs e)
+        {
+            var value = this.dataGridViewClients.SelectedRows[0].Cells[0].Value.ToString();
+            if (value == null || value.Length == 0) return;
+
+            int clientId = int.Parse(value);
+
+            var repo = new ClientRepository();
+            var client = repo.GetClient(clientId);
+
+            if (client == null) return;
+
+            CreateUpdateForm form = new CreateUpdateForm();
+            form.UpdateClient(client);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ReadClients();
+            }
+        }
     }
 }
