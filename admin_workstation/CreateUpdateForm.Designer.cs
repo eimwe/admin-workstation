@@ -30,6 +30,8 @@
         {
             labelTitle = new Label();
             panel1 = new Panel();
+            btnSave = new Button();
+            btnCancel = new Button();
             textBoxClientPhone = new TextBox();
             textBoxClientBirthDate = new TextBox();
             textBoxClientLastName = new TextBox();
@@ -40,8 +42,6 @@
             label3 = new Label();
             labelClientId = new Label();
             label1 = new Label();
-            btnCancel = new Button();
-            btnSave = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -75,6 +75,26 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(547, 296);
             panel1.TabIndex = 4;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(354, 243);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(75, 23);
+            btnSave.TabIndex = 14;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Location = new Point(435, 243);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(75, 23);
+            btnCancel.TabIndex = 14;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // textBoxClientPhone
             // 
@@ -156,24 +176,6 @@
             label1.Size = new Size(55, 15);
             label1.TabIndex = 5;
             label1.Text = "Client ID:";
-            // 
-            // btnCancel
-            // 
-            btnCancel.Location = new Point(435, 243);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(75, 23);
-            btnCancel.TabIndex = 14;
-            btnCancel.Text = "Cancel";
-            btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            btnSave.Location = new Point(354, 243);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(75, 23);
-            btnSave.TabIndex = 14;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
             // 
             // CreateUpdateForm
             // 
