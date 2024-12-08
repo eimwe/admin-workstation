@@ -68,5 +68,27 @@ namespace admin_workstation
                 ReadClients();
             }
         }
+
+        private void btnDeleteClient_Click(object sender, EventArgs e)
+        {
+            var value = this.dataGridViewClients.SelectedRows[0].Cells[0].Value.ToString();
+            if (value == null || value.Length == 0) return;
+
+            int clientId = int.Parse(value);
+
+            DialogResult dialogResult = MessageBox.Show(
+                "Are you sure you want to delete this client?",
+                "Delete Client",
+                MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+
+            var repo = new ClientRepository();
+            repo.DeleteClient(clientId);
+            ReadClients();
+        }
     }
 }
