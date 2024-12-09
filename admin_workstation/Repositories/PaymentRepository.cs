@@ -76,10 +76,10 @@ namespace admin_workstation.Repositories
                                  "(@clientId, @courseId, @amount, @paymentDate);";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@firstname", payment.clientId);
-                        command.Parameters.AddWithValue("@lastname", payment.courseId);
-                        command.Parameters.AddWithValue("@birthdate", payment.amount);
-                        command.Parameters.AddWithValue("@phone", payment.paymentDate);
+                        command.Parameters.AddWithValue("@clientId", payment.clientId);
+                        command.Parameters.AddWithValue("@courseId", payment.courseId);
+                        command.Parameters.AddWithValue("@amount", payment.amount);
+                        command.Parameters.AddWithValue("@paymentDate", payment.paymentDate);
 
                         command.ExecuteNonQuery();
                     }
