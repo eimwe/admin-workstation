@@ -10,7 +10,9 @@ namespace admin_workstation.Models
     {
         public int id;
         public int clientId;
+        public string clientName = "";
         public int courseId;
+        public string courseTitle = "";
         public decimal amount = 0;
         public DateTime paymentDate = DateTime.Now;
     }
