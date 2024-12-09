@@ -35,13 +35,13 @@
             btnUpdateClient = new Button();
             btnDeleteClient = new Button();
             tabPagePayments = new TabPage();
+            dataGridViewPayments = new DataGridView();
             btnAddPayment = new Button();
-            dataGridView1 = new DataGridView();
             tabControlTables.SuspendLayout();
             tabPageClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
             tabPagePayments.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPayments).BeginInit();
             SuspendLayout();
             // 
             // tabControlTables
@@ -126,7 +126,7 @@
             // 
             // tabPagePayments
             // 
-            tabPagePayments.Controls.Add(dataGridView1);
+            tabPagePayments.Controls.Add(dataGridViewPayments);
             tabPagePayments.Controls.Add(btnAddPayment);
             tabPagePayments.Location = new Point(4, 30);
             tabPagePayments.Name = "tabPagePayments";
@@ -134,6 +134,19 @@
             tabPagePayments.TabIndex = 1;
             tabPagePayments.Text = "Payments";
             tabPagePayments.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewPayments
+            // 
+            dataGridViewPayments.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewPayments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewPayments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewPayments.Location = new Point(3, 34);
+            dataGridViewPayments.MultiSelect = false;
+            dataGridViewPayments.Name = "dataGridViewPayments";
+            dataGridViewPayments.RowHeadersVisible = false;
+            dataGridViewPayments.RowTemplate.Height = 25;
+            dataGridViewPayments.Size = new Size(762, 337);
+            dataGridViewPayments.TabIndex = 1;
             // 
             // btnAddPayment
             // 
@@ -146,19 +159,6 @@
             btnAddPayment.TabIndex = 0;
             btnAddPayment.Text = "Add Payment";
             btnAddPayment.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(3, 34);
-            dataGridView1.MultiSelect = false;
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(762, 337);
-            dataGridView1.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -174,7 +174,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).EndInit();
             tabPagePayments.ResumeLayout(false);
             tabPagePayments.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPayments).EndInit();
             ResumeLayout(false);
         }
 
@@ -187,7 +187,7 @@
         private Button btnUpdateClient;
         private Button btnDeleteClient;
         private TabPage tabPagePayments;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewPayments;
         private Button btnAddPayment;
     }
 }

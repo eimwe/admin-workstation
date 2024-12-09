@@ -9,6 +9,7 @@ namespace admin_workstation
         {
             InitializeComponent();
             ReadClients();
+            ReadPayments();
         }
 
         private void ReadClients()
@@ -89,6 +90,35 @@ namespace admin_workstation
             var repo = new ClientRepository();
             repo.DeleteClient(clientId);
             ReadClients();
+        }
+
+        private void ReadPayments()
+        {
+            DataTable dataTable = new DataTable();
+
+            dataTable.Columns.Add("ID");
+            dataTable.Columns.Add("Client");
+            dataTable.Columns.Add("Course");
+            dataTable.Columns.Add("Amount");
+            dataTable.Columns.Add("Payment Date");
+
+            var repo = new PaymentRepository();
+            var payments = repo.GetPayments();
+
+            foreach (var payment in payments)
+            {
+                var row = dataTable.NewRow();
+
+                row["ID"] = payment.id;
+                row["Client"] = payment.clientId;
+                row["Course"] = payment.courseId;
+                row["Amount"] = payment.amount;
+                row["Payment Date"] = payment.paymentDate;
+
+                dataTable.Rows.Add(row);
+            }
+
+            this.dataGridViewPayments.DataSource = dataTable;
         }
     }
 }
