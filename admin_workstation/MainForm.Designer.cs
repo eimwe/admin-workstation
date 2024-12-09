@@ -159,6 +159,7 @@
             btnAddPayment.TabIndex = 0;
             btnAddPayment.Text = "Add Payment";
             btnAddPayment.UseVisualStyleBackColor = true;
+            btnAddPayment.Click += btnAddPayment_Click;
             // 
             // MainForm
             // 

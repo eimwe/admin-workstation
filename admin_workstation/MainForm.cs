@@ -118,5 +118,14 @@ namespace admin_workstation
 
             this.dataGridViewPayments.DataSource = dataTable;
         }
+
+        private void btnAddPayment_Click(object sender, EventArgs e)
+        {
+            AddPaymentForm form = new AddPaymentForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ReadPayments();
+            }
+        }
     }
 }
