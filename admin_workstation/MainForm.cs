@@ -24,8 +24,6 @@ namespace admin_workstation
             var repo = new ClientRepository();
             var clients = repo.GetClients();
 
-            Console.WriteLine(clients.Count);
-
             foreach (var client in clients)
             {
                 var row = dataTable.NewRow();
