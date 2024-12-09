@@ -21,7 +21,20 @@ namespace admin_workstation.Repositories
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM payments ORDER BY id DESC";
+                    string sql = "SELECT " +
+                                    "payments.id, " +
+                                    "payments.clientId, " +
+                                    "clients.firstName + ' ' + clients.lastName as clientName, " +
+                                    "payments.courseId, " +
+                                    "courses.title as courseTitle, " +
+                                    "payments.amount, " +
+                                    "payments.paymentDate " +
+                                 "FROM " +
+                                    "payments " +
+                                 "JOIN " +
+                                    "clients ON payments.clientId = clients.id " +
+                                 "JOIN courses ON payments.courseId = courses.id " +
+                                 "ORDER BY payments.id DESC";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -31,16 +44,19 @@ namespace admin_workstation.Repositories
                                 Payment payment = new Payment();
                                 payment.id = reader.GetInt32(0);
                                 payment.clientId = reader.GetInt32(1);
-                                payment.courseId = reader.GetInt32(2);
-                                payment.amount = reader.GetDecimal(3);
-                                payment.paymentDate = reader.GetDateTime(4);
-                                
+                                payment.clientName = reader.GetString(2);
+                                payment.courseId = reader.GetInt32(3);
+                                payment.courseTitle = reader.GetString(4);
+                                payment.amount = reader.GetDecimal(5);
+                                payment.paymentDate = reader.GetDateTime(6);
+
                                 payments.Add(payment);
                             }
                         }
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("Exception: " + ex.ToString());
             }

@@ -108,8 +108,8 @@ namespace admin_workstation
                 var row = dataTable.NewRow();
 
                 row["ID"] = payment.id;
-                row["Client"] = payment.clientId;
-                row["Course"] = payment.courseId;
+                row["Client"] = payment.clientName;
+                row["Course"] = payment.courseTitle;
                 row["Amount"] = payment.amount;
                 row["Payment Date"] = payment.paymentDate;
 
