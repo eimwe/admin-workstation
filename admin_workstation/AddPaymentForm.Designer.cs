@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            label1 = new Label();
-            dateTimePickerPayment = new DateTimePicker();
-            comboBoxClients = new ComboBox();
-            comboBoxCourses = new ComboBox();
-            textBoxPayAmount = new TextBox();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            btnCancelPayment = new Button();
             btnSavePayment = new Button();
+            btnCancelPayment = new Button();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            textBoxPayAmount = new TextBox();
+            comboBoxCourses = new ComboBox();
+            comboBoxClients = new ComboBox();
+            dateTimePickerPayment = new DateTimePicker();
+            label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -61,73 +61,25 @@
             panel1.Size = new Size(403, 269);
             panel1.TabIndex = 0;
             // 
-            // label1
+            // btnSavePayment
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(403, 23);
-            label1.TabIndex = 1;
-            label1.Text = "Add Payment";
-            label1.TextAlign = ContentAlignment.TopCenter;
+            btnSavePayment.Location = new Point(198, 217);
+            btnSavePayment.Name = "btnSavePayment";
+            btnSavePayment.Size = new Size(75, 23);
+            btnSavePayment.TabIndex = 5;
+            btnSavePayment.Text = "Save";
+            btnSavePayment.UseVisualStyleBackColor = true;
+            btnSavePayment.Click += btnSavePayment_Click;
             // 
-            // dateTimePickerPayment
+            // btnCancelPayment
             // 
-            dateTimePickerPayment.Location = new Point(105, 164);
-            dateTimePickerPayment.Name = "dateTimePickerPayment";
-            dateTimePickerPayment.Size = new Size(249, 23);
-            dateTimePickerPayment.TabIndex = 4;
-            // 
-            // comboBoxClients
-            // 
-            comboBoxClients.FormattingEnabled = true;
-            comboBoxClients.Location = new Point(105, 32);
-            comboBoxClients.Name = "comboBoxClients";
-            comboBoxClients.Size = new Size(249, 23);
-            comboBoxClients.TabIndex = 1;
-            // 
-            // comboBoxCourses
-            // 
-            comboBoxCourses.FormattingEnabled = true;
-            comboBoxCourses.Location = new Point(105, 81);
-            comboBoxCourses.Name = "comboBoxCourses";
-            comboBoxCourses.Size = new Size(249, 23);
-            comboBoxCourses.TabIndex = 2;
-            // 
-            // textBoxPayAmount
-            // 
-            textBoxPayAmount.Location = new Point(105, 125);
-            textBoxPayAmount.Name = "textBoxPayAmount";
-            textBoxPayAmount.Size = new Size(249, 23);
-            textBoxPayAmount.TabIndex = 3;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(36, 35);
-            label2.Name = "label2";
-            label2.Size = new Size(41, 15);
-            label2.TabIndex = 3;
-            label2.Text = "Client:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(36, 84);
-            label3.Name = "label3";
-            label3.Size = new Size(47, 15);
-            label3.TabIndex = 3;
-            label3.Text = "Course:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(36, 128);
-            label4.Name = "label4";
-            label4.Size = new Size(54, 15);
-            label4.TabIndex = 3;
-            label4.Text = "Amount:";
+            btnCancelPayment.Location = new Point(279, 217);
+            btnCancelPayment.Name = "btnCancelPayment";
+            btnCancelPayment.Size = new Size(75, 23);
+            btnCancelPayment.TabIndex = 6;
+            btnCancelPayment.Text = "Cancel";
+            btnCancelPayment.UseVisualStyleBackColor = true;
+            btnCancelPayment.Click += btnCancelPayment_Click;
             // 
             // label5
             // 
@@ -138,23 +90,73 @@
             label5.TabIndex = 3;
             label5.Text = "Date:";
             // 
-            // btnCancelPayment
+            // label4
             // 
-            btnCancelPayment.Location = new Point(279, 217);
-            btnCancelPayment.Name = "btnCancelPayment";
-            btnCancelPayment.Size = new Size(75, 23);
-            btnCancelPayment.TabIndex = 6;
-            btnCancelPayment.Text = "Cancel";
-            btnCancelPayment.UseVisualStyleBackColor = true;
+            label4.AutoSize = true;
+            label4.Location = new Point(36, 128);
+            label4.Name = "label4";
+            label4.Size = new Size(54, 15);
+            label4.TabIndex = 3;
+            label4.Text = "Amount:";
             // 
-            // btnSavePayment
+            // label3
             // 
-            btnSavePayment.Location = new Point(198, 217);
-            btnSavePayment.Name = "btnSavePayment";
-            btnSavePayment.Size = new Size(75, 23);
-            btnSavePayment.TabIndex = 5;
-            btnSavePayment.Text = "Save";
-            btnSavePayment.UseVisualStyleBackColor = true;
+            label3.AutoSize = true;
+            label3.Location = new Point(36, 84);
+            label3.Name = "label3";
+            label3.Size = new Size(47, 15);
+            label3.TabIndex = 3;
+            label3.Text = "Course:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(36, 35);
+            label2.Name = "label2";
+            label2.Size = new Size(41, 15);
+            label2.TabIndex = 3;
+            label2.Text = "Client:";
+            // 
+            // textBoxPayAmount
+            // 
+            textBoxPayAmount.Location = new Point(105, 125);
+            textBoxPayAmount.Name = "textBoxPayAmount";
+            textBoxPayAmount.Size = new Size(249, 23);
+            textBoxPayAmount.TabIndex = 3;
+            // 
+            // comboBoxCourses
+            // 
+            comboBoxCourses.FormattingEnabled = true;
+            comboBoxCourses.Location = new Point(105, 81);
+            comboBoxCourses.Name = "comboBoxCourses";
+            comboBoxCourses.Size = new Size(249, 23);
+            comboBoxCourses.TabIndex = 2;
+            // 
+            // comboBoxClients
+            // 
+            comboBoxClients.FormattingEnabled = true;
+            comboBoxClients.Location = new Point(105, 32);
+            comboBoxClients.Name = "comboBoxClients";
+            comboBoxClients.Size = new Size(249, 23);
+            comboBoxClients.TabIndex = 1;
+            // 
+            // dateTimePickerPayment
+            // 
+            dateTimePickerPayment.Location = new Point(105, 164);
+            dateTimePickerPayment.Name = "dateTimePickerPayment";
+            dateTimePickerPayment.Size = new Size(249, 23);
+            dateTimePickerPayment.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(403, 23);
+            label1.TabIndex = 1;
+            label1.Text = "Add Payment";
+            label1.TextAlign = ContentAlignment.TopCenter;
             // 
             // AddPaymentForm
             // 
