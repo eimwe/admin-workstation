@@ -47,5 +47,33 @@ namespace admin_workstation.Repositories
 
             return payments;
         }
+
+        public void CreatePayment(Payment payment)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "INSERT INTO payments " +
+                                 "(clientId, courseId, amount, paymentDate) VALUES " +
+                                 "(@clientId, @courseId, @amount, @paymentDate);";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@firstname", payment.clientId);
+                        command.Parameters.AddWithValue("@lastname", payment.courseId);
+                        command.Parameters.AddWithValue("@birthdate", payment.amount);
+                        command.Parameters.AddWithValue("@phone", payment.paymentDate);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+        }
     }
 }
