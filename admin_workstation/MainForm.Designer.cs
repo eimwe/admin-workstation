@@ -37,11 +37,18 @@
             tabPagePayments = new TabPage();
             dataGridViewPayments = new DataGridView();
             btnAddPayment = new Button();
+            tabPage1 = new TabPage();
+            btnDeleteLesson = new Button();
+            btnUpdateLesson = new Button();
+            btnAddLesson = new Button();
+            dataGridViewTimetable = new DataGridView();
             tabControlTables.SuspendLayout();
             tabPageClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
             tabPagePayments.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPayments).BeginInit();
+            tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTimetable).BeginInit();
             SuspendLayout();
             // 
             // tabControlTables
@@ -49,6 +56,7 @@
             tabControlTables.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControlTables.Controls.Add(tabPageClients);
             tabControlTables.Controls.Add(tabPagePayments);
+            tabControlTables.Controls.Add(tabPage1);
             tabControlTables.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tabControlTables.Location = new Point(12, 12);
             tabControlTables.Multiline = true;
@@ -161,6 +169,69 @@
             btnAddPayment.UseVisualStyleBackColor = true;
             btnAddPayment.Click += btnAddPayment_Click;
             // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(dataGridViewTimetable);
+            tabPage1.Controls.Add(btnAddLesson);
+            tabPage1.Controls.Add(btnUpdateLesson);
+            tabPage1.Controls.Add(btnDeleteLesson);
+            tabPage1.Location = new Point(4, 30);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Size = new Size(768, 374);
+            tabPage1.TabIndex = 2;
+            tabPage1.Text = "Timetable";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteLesson
+            // 
+            btnDeleteLesson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnDeleteLesson.AutoSize = true;
+            btnDeleteLesson.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeleteLesson.Location = new Point(676, 3);
+            btnDeleteLesson.Name = "btnDeleteLesson";
+            btnDeleteLesson.Size = new Size(89, 25);
+            btnDeleteLesson.TabIndex = 0;
+            btnDeleteLesson.Text = "Delete Lesson";
+            btnDeleteLesson.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateLesson
+            // 
+            btnUpdateLesson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnUpdateLesson.AutoSize = true;
+            btnUpdateLesson.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnUpdateLesson.Location = new Point(576, 3);
+            btnUpdateLesson.Name = "btnUpdateLesson";
+            btnUpdateLesson.Size = new Size(94, 25);
+            btnUpdateLesson.TabIndex = 0;
+            btnUpdateLesson.Text = "Update Lesson";
+            btnUpdateLesson.UseVisualStyleBackColor = true;
+            // 
+            // btnAddLesson
+            // 
+            btnAddLesson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAddLesson.AutoSize = true;
+            btnAddLesson.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAddLesson.Location = new Point(476, 3);
+            btnAddLesson.Name = "btnAddLesson";
+            btnAddLesson.Size = new Size(94, 25);
+            btnAddLesson.TabIndex = 0;
+            btnAddLesson.Text = "Add Lesson";
+            btnAddLesson.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewTimetable
+            // 
+            dataGridViewTimetable.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewTimetable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewTimetable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewTimetable.Location = new Point(3, 34);
+            dataGridViewTimetable.MultiSelect = false;
+            dataGridViewTimetable.Name = "dataGridViewTimetable";
+            dataGridViewTimetable.RowHeadersVisible = false;
+            dataGridViewTimetable.RowTemplate.Height = 25;
+            dataGridViewTimetable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewTimetable.Size = new Size(762, 337);
+            dataGridViewTimetable.TabIndex = 1;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -176,6 +247,9 @@
             tabPagePayments.ResumeLayout(false);
             tabPagePayments.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPayments).EndInit();
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTimetable).EndInit();
             ResumeLayout(false);
         }
 
@@ -190,5 +264,10 @@
         private TabPage tabPagePayments;
         private DataGridView dataGridViewPayments;
         private Button btnAddPayment;
+        private TabPage tabPage1;
+        private DataGridView dataGridViewTimetable;
+        private Button btnAddLesson;
+        private Button btnUpdateLesson;
+        private Button btnDeleteLesson;
     }
 }
