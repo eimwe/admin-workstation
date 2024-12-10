@@ -10,6 +10,7 @@ namespace admin_workstation
             InitializeComponent();
             ReadClients();
             ReadPayments();
+            ReadLessons();
         }
 
         private void ReadClients()
@@ -126,6 +127,37 @@ namespace admin_workstation
             {
                 ReadPayments();
             }
+        }
+
+        private void ReadLessons()
+        {
+            DataTable dataTable = new DataTable();
+
+            dataTable.Columns.Add("ID");
+            dataTable.Columns.Add("Client");
+            dataTable.Columns.Add("Course");
+            dataTable.Columns.Add("Teacher");
+            dataTable.Columns.Add("Classroom");
+            dataTable.Columns.Add("Lesson Date");
+
+            var repo = new LessonRepository();
+            var lessons = repo.GetLessons();
+
+            foreach (var lesson in lessons)
+            {
+                var row = dataTable.NewRow();
+
+                row["ID"] = lesson.id;
+                row["Client"] = lesson.clientName;
+                row["Course"] = lesson.courseTitle;
+                row["Teacher"] = lesson.teacherName;
+                row["Classroom"] = lesson.classroomNumber;
+                row["Lesson Date"] = lesson.lessonDate;
+
+                dataTable.Rows.Add(row);
+            }
+
+            this.dataGridViewTimetable.DataSource = dataTable;
         }
     }
 }
