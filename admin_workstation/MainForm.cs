@@ -159,5 +159,14 @@ namespace admin_workstation
 
             this.dataGridViewTimetable.DataSource = dataTable;
         }
+
+        private void btnAddLesson_Click(object sender, EventArgs e)
+        {
+            AddUpdateLessonForm form = new AddUpdateLessonForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ReadLessons();
+            }
+        }
     }
 }

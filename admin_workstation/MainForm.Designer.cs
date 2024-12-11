@@ -38,10 +38,10 @@
             dataGridViewPayments = new DataGridView();
             btnAddPayment = new Button();
             tabPage1 = new TabPage();
-            btnDeleteLesson = new Button();
-            btnUpdateLesson = new Button();
-            btnAddLesson = new Button();
             dataGridViewTimetable = new DataGridView();
+            btnAddLesson = new Button();
+            btnUpdateLesson = new Button();
+            btnDeleteLesson = new Button();
             tabControlTables.SuspendLayout();
             tabPageClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
@@ -182,42 +182,6 @@
             tabPage1.Text = "Timetable";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // btnDeleteLesson
-            // 
-            btnDeleteLesson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnDeleteLesson.AutoSize = true;
-            btnDeleteLesson.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnDeleteLesson.Location = new Point(676, 3);
-            btnDeleteLesson.Name = "btnDeleteLesson";
-            btnDeleteLesson.Size = new Size(89, 25);
-            btnDeleteLesson.TabIndex = 0;
-            btnDeleteLesson.Text = "Delete Lesson";
-            btnDeleteLesson.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateLesson
-            // 
-            btnUpdateLesson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnUpdateLesson.AutoSize = true;
-            btnUpdateLesson.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnUpdateLesson.Location = new Point(576, 3);
-            btnUpdateLesson.Name = "btnUpdateLesson";
-            btnUpdateLesson.Size = new Size(94, 25);
-            btnUpdateLesson.TabIndex = 0;
-            btnUpdateLesson.Text = "Update Lesson";
-            btnUpdateLesson.UseVisualStyleBackColor = true;
-            // 
-            // btnAddLesson
-            // 
-            btnAddLesson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAddLesson.AutoSize = true;
-            btnAddLesson.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAddLesson.Location = new Point(476, 3);
-            btnAddLesson.Name = "btnAddLesson";
-            btnAddLesson.Size = new Size(94, 25);
-            btnAddLesson.TabIndex = 0;
-            btnAddLesson.Text = "Add Lesson";
-            btnAddLesson.UseVisualStyleBackColor = true;
-            // 
             // dataGridViewTimetable
             // 
             dataGridViewTimetable.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -231,6 +195,43 @@
             dataGridViewTimetable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewTimetable.Size = new Size(762, 337);
             dataGridViewTimetable.TabIndex = 1;
+            // 
+            // btnAddLesson
+            // 
+            btnAddLesson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAddLesson.AutoSize = true;
+            btnAddLesson.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAddLesson.Location = new Point(476, 3);
+            btnAddLesson.Name = "btnAddLesson";
+            btnAddLesson.Size = new Size(94, 25);
+            btnAddLesson.TabIndex = 0;
+            btnAddLesson.Text = "Add Lesson";
+            btnAddLesson.UseVisualStyleBackColor = true;
+            btnAddLesson.Click += btnAddLesson_Click;
+            // 
+            // btnUpdateLesson
+            // 
+            btnUpdateLesson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnUpdateLesson.AutoSize = true;
+            btnUpdateLesson.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnUpdateLesson.Location = new Point(576, 3);
+            btnUpdateLesson.Name = "btnUpdateLesson";
+            btnUpdateLesson.Size = new Size(94, 25);
+            btnUpdateLesson.TabIndex = 0;
+            btnUpdateLesson.Text = "Update Lesson";
+            btnUpdateLesson.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteLesson
+            // 
+            btnDeleteLesson.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnDeleteLesson.AutoSize = true;
+            btnDeleteLesson.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeleteLesson.Location = new Point(676, 3);
+            btnDeleteLesson.Name = "btnDeleteLesson";
+            btnDeleteLesson.Size = new Size(89, 25);
+            btnDeleteLesson.TabIndex = 0;
+            btnDeleteLesson.Text = "Delete Lesson";
+            btnDeleteLesson.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
