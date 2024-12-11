@@ -73,5 +73,47 @@ namespace admin_workstation.Repositories
 
             return lessons;
         }
+
+        public Lesson? GetLesson(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM timetable WHERE id=@id";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Lesson lesson = new Lesson();
+                                lesson.id = reader.GetInt32(0);
+                                lesson.clientId = reader.GetInt32(1);
+                                lesson.clientName = reader.GetString(2);
+                                lesson.courseId = reader.GetInt32(3);
+                                lesson.courseTitle = reader.GetString(4);
+                                lesson.teacherId = reader.GetInt32(5);
+                                lesson.teacherName = reader.GetString(6);
+                                lesson.classroomId = reader.GetInt32(7);
+                                lesson.classroomNumber = reader.GetString(8);
+                                lesson.lessonDate = reader.GetDateTime(9);
+
+                                return lesson;
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+
+            return null;
+        }
     }
 }
