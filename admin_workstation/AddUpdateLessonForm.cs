@@ -1,4 +1,5 @@
-﻿using admin_workstation.Repositories;
+﻿using admin_workstation.Models;
+using admin_workstation.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,6 +46,26 @@ namespace admin_workstation
             this.comboBoxLessonClassroom.DataSource = classrooms.Select(c => new { Value = c.id, Display = c.room }).ToList();
             this.comboBoxLessonClassroom.DisplayMember = "Display";
             this.comboBoxLessonClassroom.ValueMember = "Value";
+        }
+
+        private void btnSavePayment_Click(object sender, EventArgs e)
+        {
+            Lesson lesson = new Lesson();
+            lesson.id = 0;
+            lesson.clientId = (int)((dynamic)this.comboBoxLessonClients.SelectedItem).Value;
+            lesson.courseId = (int)((dynamic)this.comboBoxLessonCourses.SelectedItem).Value;
+            lesson.teacherId = (int)((dynamic)this.comboBoxLessonTeachers.SelectedItem).Value;
+            lesson.classroomId = (int)((dynamic)this.comboBoxLessonClassroom.SelectedItem).Value;
+            lesson.lessonDate = this.dateTimePickerLesson.Value;
+
+            var repo = new LessonRepository();
+            repo.AddLesson(lesson);
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private void btnCancelPayment_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }

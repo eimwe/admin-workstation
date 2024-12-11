@@ -33,15 +33,15 @@
             btnSavePayment = new Button();
             btnCancelPayment = new Button();
             label5 = new Label();
+            label1 = new Label();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
+            comboBoxLessonClassroom = new ComboBox();
+            comboBoxLessonTeachers = new ComboBox();
             comboBoxLessonCourses = new ComboBox();
             comboBoxLessonClients = new ComboBox();
             dateTimePickerLesson = new DateTimePicker();
-            comboBoxLessonTeachers = new ComboBox();
-            comboBoxLessonClassroom = new ComboBox();
-            label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -84,6 +84,7 @@
             btnSavePayment.TabIndex = 5;
             btnSavePayment.Text = "Save";
             btnSavePayment.UseVisualStyleBackColor = true;
+            btnSavePayment.Click += btnSavePayment_Click;
             // 
             // btnCancelPayment
             // 
@@ -93,6 +94,7 @@
             btnCancelPayment.TabIndex = 6;
             btnCancelPayment.Text = "Cancel";
             btnCancelPayment.UseVisualStyleBackColor = true;
+            btnCancelPayment.Click += btnCancelPayment_Click;
             // 
             // label5
             // 
@@ -102,6 +104,15 @@
             label5.Size = new Size(34, 15);
             label5.TabIndex = 3;
             label5.Text = "Date:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(36, 122);
+            label1.Name = "label1";
+            label1.Size = new Size(66, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Classroom:";
             // 
             // label4
             // 
@@ -130,6 +141,22 @@
             label2.TabIndex = 3;
             label2.Text = "Client:";
             // 
+            // comboBoxLessonClassroom
+            // 
+            comboBoxLessonClassroom.FormattingEnabled = true;
+            comboBoxLessonClassroom.Location = new Point(105, 119);
+            comboBoxLessonClassroom.Name = "comboBoxLessonClassroom";
+            comboBoxLessonClassroom.Size = new Size(249, 23);
+            comboBoxLessonClassroom.TabIndex = 2;
+            // 
+            // comboBoxLessonTeachers
+            // 
+            comboBoxLessonTeachers.FormattingEnabled = true;
+            comboBoxLessonTeachers.Location = new Point(105, 90);
+            comboBoxLessonTeachers.Name = "comboBoxLessonTeachers";
+            comboBoxLessonTeachers.Size = new Size(249, 23);
+            comboBoxLessonTeachers.TabIndex = 2;
+            // 
             // comboBoxLessonCourses
             // 
             comboBoxLessonCourses.FormattingEnabled = true;
@@ -152,31 +179,6 @@
             dateTimePickerLesson.Name = "dateTimePickerLesson";
             dateTimePickerLesson.Size = new Size(249, 23);
             dateTimePickerLesson.TabIndex = 4;
-            // 
-            // comboBoxLessonTeachers
-            // 
-            comboBoxLessonTeachers.FormattingEnabled = true;
-            comboBoxLessonTeachers.Location = new Point(105, 90);
-            comboBoxLessonTeachers.Name = "comboBoxLessonTeachers";
-            comboBoxLessonTeachers.Size = new Size(249, 23);
-            comboBoxLessonTeachers.TabIndex = 2;
-            // 
-            // comboBoxLessonClassroom
-            // 
-            comboBoxLessonClassroom.FormattingEnabled = true;
-            comboBoxLessonClassroom.Location = new Point(105, 119);
-            comboBoxLessonClassroom.Name = "comboBoxLessonClassroom";
-            comboBoxLessonClassroom.Size = new Size(249, 23);
-            comboBoxLessonClassroom.TabIndex = 2;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(36, 122);
-            label1.Name = "label1";
-            label1.Size = new Size(66, 15);
-            label1.TabIndex = 3;
-            label1.Text = "Classroom:";
             // 
             // AddUpdateLessonForm
             // 
