@@ -115,5 +115,34 @@ namespace admin_workstation.Repositories
 
             return null;
         }
+
+        public void AddLesson(Lesson lesson)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "INSERT INTO timetable " +
+                                 "(clientId, courseId, teacherId, classroomId, lessonDate) VALUES " +
+                                 "(@clientId, @courseId, @teacherId, @classroomId, @lessonDate);";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@clientId", lesson.clientId);
+                        command.Parameters.AddWithValue("@courseId", lesson.courseId);
+                        command.Parameters.AddWithValue("@teacherId", lesson.teacherId);
+                        command.Parameters.AddWithValue("@classroomId", lesson.classroomId);
+                        command.Parameters.AddWithValue("@lessonDate", lesson.lessonDate);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+        }
     }
 }
