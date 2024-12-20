@@ -70,7 +70,7 @@ namespace admin_workstation
             }
         }
 
-        private void btnSavePayment_Click(object sender, EventArgs e)
+        private void btnSaveLesson_Click(object sender, EventArgs e)
         {
             Lesson lesson = new Lesson();
             lesson.id = this.lessonId;
@@ -94,7 +94,7 @@ namespace admin_workstation
             this.DialogResult = DialogResult.OK;
         }
 
-        private void btnCancelPayment_Click(object sender, EventArgs e)
+        private void btnCancelLesson_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }

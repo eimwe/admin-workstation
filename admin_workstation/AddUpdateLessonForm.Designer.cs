@@ -30,8 +30,8 @@
         {
             labelLessonTitle = new Label();
             panel1 = new Panel();
-            btnSavePayment = new Button();
-            btnCancelPayment = new Button();
+            btnSaveLesson = new Button();
+            btnCancelLesson = new Button();
             label5 = new Label();
             label1 = new Label();
             label4 = new Label();
@@ -59,8 +59,8 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Controls.Add(btnSavePayment);
-            panel1.Controls.Add(btnCancelPayment);
+            panel1.Controls.Add(btnSaveLesson);
+            panel1.Controls.Add(btnCancelLesson);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label4);
@@ -76,25 +76,25 @@
             panel1.Size = new Size(403, 250);
             panel1.TabIndex = 2;
             // 
-            // btnSavePayment
+            // btnSaveLesson
             // 
-            btnSavePayment.Location = new Point(197, 201);
-            btnSavePayment.Name = "btnSavePayment";
-            btnSavePayment.Size = new Size(75, 23);
-            btnSavePayment.TabIndex = 5;
-            btnSavePayment.Text = "Save";
-            btnSavePayment.UseVisualStyleBackColor = true;
-            btnSavePayment.Click += btnSavePayment_Click;
+            btnSaveLesson.Location = new Point(197, 201);
+            btnSaveLesson.Name = "btnSaveLesson";
+            btnSaveLesson.Size = new Size(75, 23);
+            btnSaveLesson.TabIndex = 5;
+            btnSaveLesson.Text = "Save";
+            btnSaveLesson.UseVisualStyleBackColor = true;
+            btnSaveLesson.Click += btnSaveLesson_Click;
             // 
-            // btnCancelPayment
+            // btnCancelLesson
             // 
-            btnCancelPayment.Location = new Point(278, 201);
-            btnCancelPayment.Name = "btnCancelPayment";
-            btnCancelPayment.Size = new Size(75, 23);
-            btnCancelPayment.TabIndex = 6;
-            btnCancelPayment.Text = "Cancel";
-            btnCancelPayment.UseVisualStyleBackColor = true;
-            btnCancelPayment.Click += btnCancelPayment_Click;
+            btnCancelLesson.Location = new Point(278, 201);
+            btnCancelLesson.Name = "btnCancelLesson";
+            btnCancelLesson.Size = new Size(75, 23);
+            btnCancelLesson.TabIndex = 6;
+            btnCancelLesson.Text = "Cancel";
+            btnCancelLesson.UseVisualStyleBackColor = true;
+            btnCancelLesson.Click += btnCancelLesson_Click;
             // 
             // label5
             // 
@@ -198,8 +198,8 @@
 
         private Label labelLessonTitle;
         private Panel panel1;
-        private Button btnSavePayment;
-        private Button btnCancelPayment;
+        private Button btnSaveLesson;
+        private Button btnCancelLesson;
         private Label label5;
         private Label label4;
         private Label label3;
