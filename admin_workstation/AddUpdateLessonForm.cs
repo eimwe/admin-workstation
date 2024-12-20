@@ -48,10 +48,32 @@ namespace admin_workstation
             this.comboBoxLessonClassroom.ValueMember = "Value";
         }
 
+        private int lessonId = 0;
+
+        public void UpdateLesson(Lesson lesson)
+        {
+            try
+            {
+                this.Text = "Update Lesson";
+                this.labelLessonTitle.Text = "Update Lesson";
+
+                this.lessonId = lesson.id;
+                comboBoxLessonClients.SelectedValue = lesson.clientId;
+                comboBoxLessonCourses.SelectedValue = lesson.courseId;
+                comboBoxLessonTeachers.SelectedValue = lesson.teacherId;
+                comboBoxLessonClassroom.SelectedValue = lesson.classroomId;
+                this.dateTimePickerLesson.Value = lesson.lessonDate;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+        }
+
         private void btnSavePayment_Click(object sender, EventArgs e)
         {
             Lesson lesson = new Lesson();
-            lesson.id = 0;
+            lesson.id = this.lessonId;
             lesson.clientId = (int)((dynamic)this.comboBoxLessonClients.SelectedItem).Value;
             lesson.courseId = (int)((dynamic)this.comboBoxLessonCourses.SelectedItem).Value;
             lesson.teacherId = (int)((dynamic)this.comboBoxLessonTeachers.SelectedItem).Value;
@@ -59,7 +81,16 @@ namespace admin_workstation
             lesson.lessonDate = this.dateTimePickerLesson.Value;
 
             var repo = new LessonRepository();
-            repo.AddLesson(lesson);
+
+            if (lesson.id == 0)
+            {
+                repo.AddLesson(lesson);
+            }
+            else
+            {
+                repo.UpdateLesson(lesson);
+            }
+
             this.DialogResult = DialogResult.OK;
         }
 
