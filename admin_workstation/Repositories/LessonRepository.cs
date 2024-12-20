@@ -81,7 +81,25 @@ namespace admin_workstation.Repositories
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM timetable WHERE id=@id";
+                    string sql = "SELECT " +
+                                "timetable.id, " +
+                                "timetable.clientId, " +
+                                "clients.firstName + ' ' + clients.lastName as clientName, " +
+                                "timetable.courseId, " +
+                                "courses.title as courseTitle, " +
+                                "timetable.teacherId, " +
+                                "teachers.firstName + ' ' + teachers.lastName as teacherName, " +
+                                "timetable.classroomId, " +
+                                "classrooms.room as classroomNumber, " +
+                                "timetable.lessonDate " +
+                             "FROM " +
+                                "timetable " +
+                             "JOIN clients ON timetable.clientId = clients.id " +
+                             "JOIN courses ON timetable.courseId = courses.id " +
+                             "JOIN teachers ON timetable.teacherId = teachers.id " +
+                             "JOIN classrooms ON timetable.classroomId = classrooms.id " +
+                             "WHERE timetable.id = @id";
+
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@id", id);
