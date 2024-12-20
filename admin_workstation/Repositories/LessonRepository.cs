@@ -162,5 +162,36 @@ namespace admin_workstation.Repositories
                 Console.WriteLine("Exception: " + ex.ToString());
             }
         }
+
+        public void UpdateLesson(Lesson lesson)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "UPDATE timetable " +
+                                 "SET clientId=@clientId, courseId=@courseId, " +
+                                 "teacherId=@teacherId, classroomId=@classroomId, " +
+                                 "lessonDate=@lessonDate WHERE id=@id";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", lesson.id);
+                        command.Parameters.AddWithValue("@clientId", lesson.clientId);
+                        command.Parameters.AddWithValue("@courseId", lesson.courseId);
+                        command.Parameters.AddWithValue("@teacherId", lesson.teacherId);
+                        command.Parameters.AddWithValue("@classroomId", lesson.classroomId);
+                        command.Parameters.AddWithValue("@lessonDate", lesson.lessonDate);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+        }
     }
 }
