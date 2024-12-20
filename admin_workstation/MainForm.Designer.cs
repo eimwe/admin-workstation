@@ -220,6 +220,7 @@
             btnUpdateLesson.TabIndex = 0;
             btnUpdateLesson.Text = "Update Lesson";
             btnUpdateLesson.UseVisualStyleBackColor = true;
+            btnUpdateLesson.Click += btnUpdateLesson_Click;
             // 
             // btnDeleteLesson
             // 

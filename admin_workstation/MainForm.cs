@@ -1,3 +1,4 @@
+using admin_workstation.Models;
 using admin_workstation.Repositories;
 using System.Data;
 
@@ -167,6 +168,33 @@ namespace admin_workstation
             {
                 ReadLessons();
             }
+        }
+
+        private void btnUpdateLesson_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var value = this.dataGridViewTimetable.SelectedRows[0].Cells[0].Value.ToString();
+                if (value == null || value.Length == 0) return;
+
+                int lessonId = int.Parse(value);
+
+                var repo = new LessonRepository();
+                var lesson = repo.GetLesson(lessonId);
+
+                if (lesson == null) return;
+                AddUpdateLessonForm form = new AddUpdateLessonForm();
+                form.UpdateLesson(lesson);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    ReadLessons();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+            
         }
     }
 }
