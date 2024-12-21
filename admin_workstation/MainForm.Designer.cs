@@ -233,6 +233,7 @@
             btnDeleteLesson.TabIndex = 0;
             btnDeleteLesson.Text = "Delete Lesson";
             btnDeleteLesson.UseVisualStyleBackColor = true;
+            btnDeleteLesson.Click += btnDeleteLesson_Click;
             // 
             // MainForm
             // 

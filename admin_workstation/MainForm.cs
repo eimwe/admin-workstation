@@ -194,7 +194,29 @@ namespace admin_workstation
             {
                 Console.WriteLine("Exception: " + ex.ToString());
             }
-            
+
+        }
+
+        private void btnDeleteLesson_Click(object sender, EventArgs e)
+        {
+            var value = this.dataGridViewTimetable.SelectedRows[0].Cells[0].Value.ToString();
+            if (value == null || value.Length == 0) return;
+
+            int lessontId = int.Parse(value);
+
+            DialogResult dialogResult = MessageBox.Show(
+                "Are you sure you want to delete this lesson?",
+                "Delete Lesson",
+                MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+
+            var repo = new LessonRepository();
+            repo.DeleteLesson(lessontId);
+            ReadLessons();
         }
     }
 }
