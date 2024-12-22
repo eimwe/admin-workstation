@@ -246,5 +246,19 @@ namespace admin_workstation
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btnExportClients_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewClients.Rows.Count > 0)
+            {
+                var exporter = new TableExporter();
+                exporter.ExportDataGridToPdf(dataGridViewClients, "Clients List");
+            }
+            else
+            {
+                MessageBox.Show("No data to export.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

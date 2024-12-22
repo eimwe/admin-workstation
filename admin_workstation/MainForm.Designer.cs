@@ -266,7 +266,7 @@
             btnExportClients.Size = new Size(25, 25);
             btnExportClients.TabIndex = 0;
             btnExportClients.UseVisualStyleBackColor = true;
-            btnExportClients.Click += btnPrintContract_Click;
+            btnExportClients.Click += btnExportClients_Click;
             // 
             // MainForm
             // 
