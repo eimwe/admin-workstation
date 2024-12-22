@@ -9,6 +9,12 @@ namespace admin_workstation
     {
         public MainForm()
         {
+            if (!DatabaseCheck.VerifyDatabase())
+            {
+                Application.Exit();
+                return;
+            }
+
             InitializeComponent();
             ReadClients();
             ReadPayments();
