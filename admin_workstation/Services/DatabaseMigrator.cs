@@ -30,6 +30,8 @@ namespace admin_workstation.Services
                 sqlServerConnection.Open();
 
                 CreateTables(sqliteConnection);
+
+                MigrateClients(sqlServerConnection, sqliteConnection);
             }
         }
 
@@ -101,6 +103,31 @@ namespace admin_workstation.Services
                 {
                     cmd.ExecuteNonQuery();
                 }
+            }
+        }
+
+        private void MigrateClients(SqlConnection source, SQLiteConnection destination)
+        {
+            var cmd = new SqlCommand("SELECT * FROM clients", source);
+            var reader = cmd.ExecuteReader();
+
+            using (var transaction = destination.BeginTransaction())
+            {
+                var insertCmd = new SQLiteCommand(
+                    "INSERT INTO clients (firstname, lastname, birthdate, phone) VALUES (@firstname, @lastname, @birthdate, @phone)",
+                    destination);
+
+                while (reader.Read())
+                {
+                    insertCmd.Parameters.Clear();
+                    insertCmd.Parameters.AddWithValue("@firstname", reader["firstname"]);
+                    insertCmd.Parameters.AddWithValue("@lastname", reader["lastname"]);
+                    insertCmd.Parameters.AddWithValue("@birthdate", reader["birthdate"]);
+                    insertCmd.Parameters.AddWithValue("@phone", reader["phone"]);
+                    insertCmd.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
             }
         }
     }
