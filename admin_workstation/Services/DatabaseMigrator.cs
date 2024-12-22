@@ -36,6 +36,7 @@ namespace admin_workstation.Services
                 MigrateCourses(sqlServerConnection, sqliteConnection);
                 MigrateTeacherCourse(sqlServerConnection, sqliteConnection);
                 MigrateClassrooms(sqlServerConnection, sqliteConnection);
+                MigratePayments(sqlServerConnection, sqliteConnection);
             }
         }
 
@@ -229,6 +230,32 @@ namespace admin_workstation.Services
                 {
                     insertCmd.Parameters.Clear();
                     insertCmd.Parameters.AddWithValue("@room", reader["room"]);
+                    insertCmd.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+            }
+        }
+
+        private void MigratePayments(SqlConnection source, SQLiteConnection destination)
+        {
+            var cmd = new SqlCommand("SELECT * FROM payments", source);
+            var reader = cmd.ExecuteReader();
+
+            using (var transaction = destination.BeginTransaction())
+            {
+                var insertCmd = new SQLiteCommand(
+                    @"INSERT INTO payments (clientId, courseId, amount, paymentDate) 
+              VALUES (@clientId, @courseId, @amount, @paymentDate)",
+                    destination);
+
+                while (reader.Read())
+                {
+                    insertCmd.Parameters.Clear();
+                    insertCmd.Parameters.AddWithValue("@clientId", reader["clientId"]);
+                    insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
+                    insertCmd.Parameters.AddWithValue("@amount", reader["amount"]);
+                    insertCmd.Parameters.AddWithValue("@paymentDate", reader["paymentDate"]);
                     insertCmd.ExecuteNonQuery();
                 }
 
