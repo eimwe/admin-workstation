@@ -1,7 +1,8 @@
-﻿using admin_workstation.Models;
-using Microsoft.Data.SqlClient;
+﻿using admin_workstation.Configs;
+using admin_workstation.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace admin_workstation.Repositories
 {
     public class ClientRepository
     {
-        private readonly string connectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=lang-center;Integrated Security=True;Trust Server Certificate=True";
+        private readonly string connectionString = DatabaseConfig.GetConnectionString();
 
         public List<Client> GetClients()
         {
@@ -18,14 +19,14 @@ namespace admin_workstation.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
 
                     string sql = "SELECT * FROM clients ORDER BY id DESC";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -54,14 +55,14 @@ namespace admin_workstation.Repositories
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "SELECT * FROM clients WHERE id=@id";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@id", id);
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        using (var reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
@@ -91,13 +92,13 @@ namespace admin_workstation.Repositories
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "INSERT INTO clients " +
                                  "(firstname, lastname, birthdate, phone) VALUES " +
                                  "(@firstname, @lastname, @birthdate, @phone);";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@firstname", client.firstName);
                         command.Parameters.AddWithValue("@lastname", client.lastName);
@@ -119,14 +120,14 @@ namespace admin_workstation.Repositories
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "UPDATE clients " +
                                  "SET firstname=@firstname, lastname=@lastname, " +
                                  "birthdate=@birthdate, phone=@phone " +
                                  "WHERE id=@id";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@id", client.id);
                         command.Parameters.AddWithValue("@firstname", client.firstName);
@@ -149,11 +150,11 @@ namespace admin_workstation.Repositories
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "DELETE FROM clients WHERE id=@id";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@id", id);
 

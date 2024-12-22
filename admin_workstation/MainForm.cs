@@ -1,5 +1,6 @@
 using admin_workstation.Models;
 using admin_workstation.Repositories;
+using admin_workstation.Services;
 using System.Data;
 
 namespace admin_workstation
@@ -8,6 +9,12 @@ namespace admin_workstation
     {
         public MainForm()
         {
+            if (!DatabaseCheck.VerifyDatabase())
+            {
+                Application.Exit();
+                return;
+            }
+
             InitializeComponent();
             ReadClients();
             ReadPayments();

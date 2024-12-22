@@ -1,7 +1,8 @@
-﻿using admin_workstation.Models;
-using Microsoft.Data.SqlClient;
+﻿using admin_workstation.Configs;
+using admin_workstation.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace admin_workstation.Repositories
 {
     public class PaymentRepository
     {
-        private readonly string connectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=lang-center;Integrated Security=True;Trust Server Certificate=True";
+        private readonly string connectionString = DatabaseConfig.GetConnectionString();
 
         public List<Payment> GetPayments()
         {
@@ -18,13 +19,13 @@ namespace admin_workstation.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "SELECT " +
                                     "payments.id, " +
                                     "payments.clientId, " +
-                                    "clients.firstName + ' ' + clients.lastName as clientName, " +
+                                    "clients.firstName || ' ' || clients.lastName as clientName, " +
                                     "payments.courseId, " +
                                     "courses.title as courseTitle, " +
                                     "payments.amount, " +
@@ -35,9 +36,9 @@ namespace admin_workstation.Repositories
                                     "clients ON payments.clientId = clients.id " +
                                  "JOIN courses ON payments.courseId = courses.id " +
                                  "ORDER BY payments.id DESC";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -68,13 +69,13 @@ namespace admin_workstation.Repositories
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "INSERT INTO payments " +
                                  "(clientId, courseId, amount, paymentDate) VALUES " +
                                  "(@clientId, @courseId, @amount, @paymentDate);";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@clientId", payment.clientId);
                         command.Parameters.AddWithValue("@courseId", payment.courseId);

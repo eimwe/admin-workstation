@@ -1,7 +1,8 @@
-﻿using admin_workstation.Models;
-using Microsoft.Data.SqlClient;
+﻿using admin_workstation.Configs;
+using admin_workstation.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace admin_workstation.Repositories
 {
     public class LessonRepository
     {
-        private readonly string connectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=lang-center;Integrated Security=True;Trust Server Certificate=True";
+        private readonly string connectionString = DatabaseConfig.GetConnectionString();
 
         public List<Lesson> GetLessons()
         {
@@ -18,17 +19,17 @@ namespace admin_workstation.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "SELECT " +
                                     "timetable.id, " +
                                     "timetable.clientId, " +
-                                    "clients.firstName + ' ' + clients.lastName as clientName, " +
+                                    "clients.firstName || ' ' || clients.lastName as clientName, " +
                                     "timetable.courseId, " +
                                     "courses.title as courseTitle, " +
                                     "timetable.teacherId, " +
-                                    "teachers.firstName + ' ' + teachers.lastName as teacherName, " +
+                                    "teachers.firstName || ' ' || teachers.lastName as teacherName, " +
                                     "timetable.classroomId, " +
                                     "classrooms.room as classroomNumber, " +
                                     "timetable.lessonDate " +
@@ -39,9 +40,9 @@ namespace admin_workstation.Repositories
                                  "JOIN teachers ON timetable.teacherId = teachers.id " +
                                  "JOIN classrooms ON timetable.classroomId = classrooms.id " +
                                  "ORDER BY timetable.id DESC";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -78,17 +79,17 @@ namespace admin_workstation.Repositories
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "SELECT " +
                                 "timetable.id, " +
                                 "timetable.clientId, " +
-                                "clients.firstName + ' ' + clients.lastName as clientName, " +
+                                "clients.firstName || ' ' || clients.lastName as clientName, " +
                                 "timetable.courseId, " +
                                 "courses.title as courseTitle, " +
                                 "timetable.teacherId, " +
-                                "teachers.firstName + ' ' + teachers.lastName as teacherName, " +
+                                "teachers.firstName || ' ' || teachers.lastName as teacherName, " +
                                 "timetable.classroomId, " +
                                 "classrooms.room as classroomNumber, " +
                                 "timetable.lessonDate " +
@@ -100,10 +101,10 @@ namespace admin_workstation.Repositories
                              "JOIN classrooms ON timetable.classroomId = classrooms.id " +
                              "WHERE timetable.id = @id";
 
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@id", id);
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        using (var reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
@@ -138,13 +139,13 @@ namespace admin_workstation.Repositories
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "INSERT INTO timetable " +
                                  "(clientId, courseId, teacherId, classroomId, lessonDate) VALUES " +
                                  "(@clientId, @courseId, @teacherId, @classroomId, @lessonDate);";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@clientId", lesson.clientId);
                         command.Parameters.AddWithValue("@courseId", lesson.courseId);
@@ -167,14 +168,14 @@ namespace admin_workstation.Repositories
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "UPDATE timetable " +
                                  "SET clientId=@clientId, courseId=@courseId, " +
                                  "teacherId=@teacherId, classroomId=@classroomId, " +
                                  "lessonDate=@lessonDate WHERE id=@id";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@id", lesson.id);
                         command.Parameters.AddWithValue("@clientId", lesson.clientId);
@@ -198,11 +199,11 @@ namespace admin_workstation.Repositories
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     string sql = "DELETE FROM timetable WHERE id=@id";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@id", id);
 
