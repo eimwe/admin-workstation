@@ -1,5 +1,6 @@
 using admin_workstation.Models;
 using admin_workstation.Repositories;
+using admin_workstation.Services;
 using System.Data;
 
 namespace admin_workstation
@@ -12,6 +13,28 @@ namespace admin_workstation
             ReadClients();
             ReadPayments();
             ReadLessons();
+            MigrateDatabase(null, null);
+        }
+
+        private async void MigrateDatabase(object sender, EventArgs e)
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    string sqlServerConnString = "Data Source=localhost\\sqlexpress;Initial Catalog=lang-center;Integrated Security=True;Trust Server Certificate=True";
+                    string sqliteDbPath = "language-center.db";
+
+                    var migrator = new DatabaseMigrator(sqlServerConnString, sqliteDbPath);
+                    migrator.Migrate();
+                });
+
+                MessageBox.Show("Migration completed successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Migration failed: {ex.Message}");
+            }
         }
 
         private void ReadClients()
