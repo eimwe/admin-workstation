@@ -44,6 +44,7 @@
             btnAddLesson = new Button();
             btnUpdateLesson = new Button();
             btnDeleteLesson = new Button();
+            btnExportClients = new Button();
             tabControlTables.SuspendLayout();
             tabPageClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
@@ -69,6 +70,7 @@
             // 
             // tabPageClients
             // 
+            tabPageClients.Controls.Add(btnExportClients);
             tabPageClients.Controls.Add(btnPrintContract);
             tabPageClients.Controls.Add(dataGridViewClients);
             tabPageClients.Controls.Add(btnCreateClient);
@@ -252,6 +254,20 @@
             btnDeleteLesson.UseVisualStyleBackColor = true;
             btnDeleteLesson.Click += btnDeleteLesson_Click;
             // 
+            // btnExportClients
+            // 
+            btnExportClients.BackgroundImage = (Image)resources.GetObject("btnExportClients.BackgroundImage");
+            btnExportClients.BackgroundImageLayout = ImageLayout.Zoom;
+            btnExportClients.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnExportClients.Location = new Point(37, 6);
+            btnExportClients.MaximumSize = new Size(25, 25);
+            btnExportClients.MinimumSize = new Size(25, 25);
+            btnExportClients.Name = "btnExportClients";
+            btnExportClients.Size = new Size(25, 25);
+            btnExportClients.TabIndex = 0;
+            btnExportClients.UseVisualStyleBackColor = true;
+            btnExportClients.Click += btnPrintContract_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -290,5 +306,6 @@
         private Button btnUpdateLesson;
         private Button btnDeleteLesson;
         private Button btnPrintContract;
+        private Button btnExportClients;
     }
 }
