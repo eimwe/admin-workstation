@@ -34,6 +34,7 @@ namespace admin_workstation.Services
                 MigrateClients(sqlServerConnection, sqliteConnection);
                 MigrateTeachers(sqlServerConnection, sqliteConnection);
                 MigrateCourses(sqlServerConnection, sqliteConnection);
+                MigrateTeacherCourse(sqlServerConnection, sqliteConnection);
             }
         }
 
@@ -181,6 +182,29 @@ namespace admin_workstation.Services
                     insertCmd.Parameters.AddWithValue("@duration", reader["duration"]);
                     insertCmd.Parameters.AddWithValue("@totalprice", reader["totalprice"]);
                     insertCmd.Parameters.AddWithValue("@monthprice", reader["monthprice"]);
+                    insertCmd.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+            }
+        }
+
+        private void MigrateTeacherCourse(SqlConnection source, SQLiteConnection destination)
+        {
+            var cmd = new SqlCommand("SELECT * FROM teacher_course", source);
+            var reader = cmd.ExecuteReader();
+
+            using (var transaction = destination.BeginTransaction())
+            {
+                var insertCmd = new SQLiteCommand(
+                    "INSERT INTO teacher_course (teacherId, courseId) VALUES (@teacherId, @courseId)",
+                    destination);
+
+                while (reader.Read())
+                {
+                    insertCmd.Parameters.Clear();
+                    insertCmd.Parameters.AddWithValue("@teacherId", reader["teacherId"]);
+                    insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
                     insertCmd.ExecuteNonQuery();
                 }
 
