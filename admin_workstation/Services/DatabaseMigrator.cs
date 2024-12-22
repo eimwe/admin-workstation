@@ -37,6 +37,7 @@ namespace admin_workstation.Services
                 MigrateTeacherCourse(sqlServerConnection, sqliteConnection);
                 MigrateClassrooms(sqlServerConnection, sqliteConnection);
                 MigratePayments(sqlServerConnection, sqliteConnection);
+                MigrateTimetable(sqlServerConnection, sqliteConnection);
             }
         }
 
@@ -256,6 +257,33 @@ namespace admin_workstation.Services
                     insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
                     insertCmd.Parameters.AddWithValue("@amount", reader["amount"]);
                     insertCmd.Parameters.AddWithValue("@paymentDate", reader["paymentDate"]);
+                    insertCmd.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+            }
+        }
+
+        private void MigrateTimetable(SqlConnection source, SQLiteConnection destination)
+        {
+            var cmd = new SqlCommand("SELECT * FROM timetable", source);
+            var reader = cmd.ExecuteReader();
+
+            using (var transaction = destination.BeginTransaction())
+            {
+                var insertCmd = new SQLiteCommand(
+                    @"INSERT INTO timetable (clientId, courseId, teacherId, classroomId, lessonDate) 
+              VALUES (@clientId, @courseId, @teacherId, @classroomId, @lessonDate)",
+                    destination);
+
+                while (reader.Read())
+                {
+                    insertCmd.Parameters.Clear();
+                    insertCmd.Parameters.AddWithValue("@clientId", reader["clientId"]);
+                    insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
+                    insertCmd.Parameters.AddWithValue("@teacherId", reader["teacherId"]);
+                    insertCmd.Parameters.AddWithValue("@classroomId", reader["classroomId"]);
+                    insertCmd.Parameters.AddWithValue("@lessonDate", reader["lessonDate"]);
                     insertCmd.ExecuteNonQuery();
                 }
 
