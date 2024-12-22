@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tabControlTables = new TabControl();
             tabPageClients = new TabPage();
+            btnPrintContract = new Button();
             dataGridViewClients = new DataGridView();
             btnCreateClient = new Button();
             btnUpdateClient = new Button();
@@ -67,6 +69,7 @@
             // 
             // tabPageClients
             // 
+            tabPageClients.Controls.Add(btnPrintContract);
             tabPageClients.Controls.Add(dataGridViewClients);
             tabPageClients.Controls.Add(btnCreateClient);
             tabPageClients.Controls.Add(btnUpdateClient);
@@ -78,6 +81,19 @@
             tabPageClients.TabIndex = 0;
             tabPageClients.Text = "Clients";
             tabPageClients.UseVisualStyleBackColor = true;
+            // 
+            // btnPrintContract
+            // 
+            btnPrintContract.BackgroundImage = (Image)resources.GetObject("btnPrintContract.BackgroundImage");
+            btnPrintContract.BackgroundImageLayout = ImageLayout.Zoom;
+            btnPrintContract.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnPrintContract.Location = new Point(6, 6);
+            btnPrintContract.MaximumSize = new Size(25, 25);
+            btnPrintContract.MinimumSize = new Size(25, 25);
+            btnPrintContract.Name = "btnPrintContract";
+            btnPrintContract.Size = new Size(25, 25);
+            btnPrintContract.TabIndex = 0;
+            btnPrintContract.UseVisualStyleBackColor = true;
             // 
             // dataGridViewClients
             // 
@@ -272,5 +288,6 @@
         private Button btnAddLesson;
         private Button btnUpdateLesson;
         private Button btnDeleteLesson;
+        private Button btnPrintContract;
     }
 }
