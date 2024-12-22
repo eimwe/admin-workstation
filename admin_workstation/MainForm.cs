@@ -23,7 +23,7 @@ namespace admin_workstation
                 await Task.Run(() =>
                 {
                     string sqlServerConnString = "Data Source=localhost\\sqlexpress;Initial Catalog=lang-center;Integrated Security=True;Trust Server Certificate=True";
-                    string sqliteDbPath = "language-center.db";
+                    string sqliteDbPath = Path.Combine(Application.StartupPath, "language-center.db");
 
                     var migrator = new DatabaseMigrator(sqlServerConnString, sqliteDbPath);
                     migrator.Migrate();
