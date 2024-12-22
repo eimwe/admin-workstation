@@ -2,6 +2,7 @@ using admin_workstation.Models;
 using admin_workstation.Repositories;
 using admin_workstation.Services;
 using System.Data;
+using System.Windows.Forms;
 
 namespace admin_workstation
 {
@@ -224,6 +225,40 @@ namespace admin_workstation
             var repo = new LessonRepository();
             repo.DeleteLesson(lessontId);
             ReadLessons();
+        }
+
+        private void btnPrintContract_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewClients.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dataGridViewClients.SelectedRows[0];
+
+                string fullName = $"{row.Cells["Name"].Value}";
+                string dateOfBirth = $"{row.Cells["Date of Birth"].Value}";
+                string phoneNumber = $"{row.Cells["Phone"].Value}";
+
+                var generator = new ContractGenerator();
+                generator.GenerateContract(fullName, dateOfBirth, phoneNumber);
+            }
+            else
+            {
+                MessageBox.Show("Please select a client first.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnExportClients_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewClients.Rows.Count > 0)
+            {
+                var exporter = new TableExporter();
+                exporter.ExportDataGridToPdf(dataGridViewClients, "Clients List");
+            }
+            else
+            {
+                MessageBox.Show("No data to export.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

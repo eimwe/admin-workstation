@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tabControlTables = new TabControl();
             tabPageClients = new TabPage();
+            btnPrintContract = new Button();
             dataGridViewClients = new DataGridView();
             btnCreateClient = new Button();
             btnUpdateClient = new Button();
@@ -42,6 +44,7 @@
             btnAddLesson = new Button();
             btnUpdateLesson = new Button();
             btnDeleteLesson = new Button();
+            btnExportClients = new Button();
             tabControlTables.SuspendLayout();
             tabPageClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
@@ -67,6 +70,8 @@
             // 
             // tabPageClients
             // 
+            tabPageClients.Controls.Add(btnExportClients);
+            tabPageClients.Controls.Add(btnPrintContract);
             tabPageClients.Controls.Add(dataGridViewClients);
             tabPageClients.Controls.Add(btnCreateClient);
             tabPageClients.Controls.Add(btnUpdateClient);
@@ -78,6 +83,20 @@
             tabPageClients.TabIndex = 0;
             tabPageClients.Text = "Clients";
             tabPageClients.UseVisualStyleBackColor = true;
+            // 
+            // btnPrintContract
+            // 
+            btnPrintContract.BackgroundImage = (Image)resources.GetObject("btnPrintContract.BackgroundImage");
+            btnPrintContract.BackgroundImageLayout = ImageLayout.Zoom;
+            btnPrintContract.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnPrintContract.Location = new Point(6, 6);
+            btnPrintContract.MaximumSize = new Size(25, 25);
+            btnPrintContract.MinimumSize = new Size(25, 25);
+            btnPrintContract.Name = "btnPrintContract";
+            btnPrintContract.Size = new Size(25, 25);
+            btnPrintContract.TabIndex = 0;
+            btnPrintContract.UseVisualStyleBackColor = true;
+            btnPrintContract.Click += btnPrintContract_Click;
             // 
             // dataGridViewClients
             // 
@@ -235,6 +254,20 @@
             btnDeleteLesson.UseVisualStyleBackColor = true;
             btnDeleteLesson.Click += btnDeleteLesson_Click;
             // 
+            // btnExportClients
+            // 
+            btnExportClients.BackgroundImage = (Image)resources.GetObject("btnExportClients.BackgroundImage");
+            btnExportClients.BackgroundImageLayout = ImageLayout.Zoom;
+            btnExportClients.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnExportClients.Location = new Point(37, 6);
+            btnExportClients.MaximumSize = new Size(25, 25);
+            btnExportClients.MinimumSize = new Size(25, 25);
+            btnExportClients.Name = "btnExportClients";
+            btnExportClients.Size = new Size(25, 25);
+            btnExportClients.TabIndex = 0;
+            btnExportClients.UseVisualStyleBackColor = true;
+            btnExportClients.Click += btnExportClients_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -272,5 +305,7 @@
         private Button btnAddLesson;
         private Button btnUpdateLesson;
         private Button btnDeleteLesson;
+        private Button btnPrintContract;
+        private Button btnExportClients;
     }
 }
