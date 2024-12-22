@@ -94,6 +94,7 @@
             btnPrintContract.Size = new Size(25, 25);
             btnPrintContract.TabIndex = 0;
             btnPrintContract.UseVisualStyleBackColor = true;
+            btnPrintContract.Click += btnPrintContract_Click;
             // 
             // dataGridViewClients
             // 
