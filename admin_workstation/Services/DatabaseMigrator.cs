@@ -32,6 +32,7 @@ namespace admin_workstation.Services
                 CreateTables(sqliteConnection);
 
                 MigrateClients(sqlServerConnection, sqliteConnection);
+                MigrateTeachers(sqlServerConnection, sqliteConnection);
             }
         }
 
@@ -122,6 +123,34 @@ namespace admin_workstation.Services
                     insertCmd.Parameters.Clear();
                     insertCmd.Parameters.AddWithValue("@firstname", reader["firstname"]);
                     insertCmd.Parameters.AddWithValue("@lastname", reader["lastname"]);
+                    insertCmd.Parameters.AddWithValue("@birthdate", reader["birthdate"]);
+                    insertCmd.Parameters.AddWithValue("@phone", reader["phone"]);
+                    insertCmd.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+            }
+        }
+
+        private void MigrateTeachers(SqlConnection source, SQLiteConnection destination)
+        {
+            var cmd = new SqlCommand("SELECT * FROM teachers", source);
+            var reader = cmd.ExecuteReader();
+
+            using (var transaction = destination.BeginTransaction())
+            {
+                var insertCmd = new SQLiteCommand(
+                    @"INSERT INTO teachers (firstname, lastname, username, passkey, birthdate, phone) 
+                  VALUES (@firstname, @lastname, @username, @passkey, @birthdate, @phone)",
+                    destination);
+
+                while (reader.Read())
+                {
+                    insertCmd.Parameters.Clear();
+                    insertCmd.Parameters.AddWithValue("@firstname", reader["firstname"]);
+                    insertCmd.Parameters.AddWithValue("@lastname", reader["lastname"]);
+                    insertCmd.Parameters.AddWithValue("@username", reader["username"]);
+                    insertCmd.Parameters.AddWithValue("@passkey", reader["passkey"]);
                     insertCmd.Parameters.AddWithValue("@birthdate", reader["birthdate"]);
                     insertCmd.Parameters.AddWithValue("@phone", reader["phone"]);
                     insertCmd.ExecuteNonQuery();
