@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using System.Data.SQLite;
+using admin_workstation.Models;
 
 namespace admin_workstation.Services
 {
@@ -31,13 +32,13 @@ namespace admin_workstation.Services
 
                 CreateTables(sqliteConnection);
 
-                MigrateClients(sqlServerConnection, sqliteConnection);
-                MigrateTeachers(sqlServerConnection, sqliteConnection);
-                MigrateCourses(sqlServerConnection, sqliteConnection);
-                MigrateTeacherCourse(sqlServerConnection, sqliteConnection);
-                MigrateClassrooms(sqlServerConnection, sqliteConnection);
-                MigratePayments(sqlServerConnection, sqliteConnection);
-                MigrateTimetable(sqlServerConnection, sqliteConnection);
+                MigrateClients();
+                MigrateTeachers();
+                MigrateCourses();
+                MigrateClassrooms();
+                MigrateTeacherCourse();
+                MigratePayments();
+                MigrateTimetable();
             }
         }
 
@@ -112,182 +113,230 @@ namespace admin_workstation.Services
             }
         }
 
-        private void MigrateClients(SqlConnection source, SQLiteConnection destination)
+        private void MigrateClients()
         {
-            var cmd = new SqlCommand("SELECT * FROM clients", source);
-            var reader = cmd.ExecuteReader();
-
-            using (var transaction = destination.BeginTransaction())
+            using (var source = new SqlConnection(_sqlServerConnectionString))
+            using (var destination = new SQLiteConnection($"Data Source={_sqliteDbPath};Version=3;"))
             {
-                var insertCmd = new SQLiteCommand(
-                    "INSERT INTO clients (firstname, lastname, birthdate, phone) VALUES (@firstname, @lastname, @birthdate, @phone)",
-                    destination);
+                source.Open();
+                destination.Open();
 
-                while (reader.Read())
+                using (var cmd = new SqlCommand("SELECT * FROM clients", source))
+                using (var reader = cmd.ExecuteReader())
+
+                using (var transaction = destination.BeginTransaction())
                 {
-                    insertCmd.Parameters.Clear();
-                    insertCmd.Parameters.AddWithValue("@firstname", reader["firstname"]);
-                    insertCmd.Parameters.AddWithValue("@lastname", reader["lastname"]);
-                    insertCmd.Parameters.AddWithValue("@birthdate", reader["birthdate"]);
-                    insertCmd.Parameters.AddWithValue("@phone", reader["phone"]);
-                    insertCmd.ExecuteNonQuery();
-                }
+                    var insertCmd = new SQLiteCommand(
+                        "INSERT INTO clients (firstname, lastname, birthdate, phone) VALUES (@firstname, @lastname, @birthdate, @phone)",
+                        destination);
 
-                transaction.Commit();
+                    while (reader.Read())
+                    {
+                        insertCmd.Parameters.Clear();
+                        insertCmd.Parameters.AddWithValue("@firstname", reader["firstname"]);
+                        insertCmd.Parameters.AddWithValue("@lastname", reader["lastname"]);
+                        insertCmd.Parameters.AddWithValue("@birthdate", reader["birthdate"]);
+                        insertCmd.Parameters.AddWithValue("@phone", reader["phone"]);
+                        insertCmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                }
             }
         }
 
-        private void MigrateTeachers(SqlConnection source, SQLiteConnection destination)
+        private void MigrateTeachers()
         {
-            var cmd = new SqlCommand("SELECT * FROM teachers", source);
-            var reader = cmd.ExecuteReader();
-
-            using (var transaction = destination.BeginTransaction())
+            using (var source = new SqlConnection(_sqlServerConnectionString))
+            using (var destination = new SQLiteConnection($"Data Source={_sqliteDbPath};Version=3;"))
             {
-                var insertCmd = new SQLiteCommand(
-                    @"INSERT INTO teachers (firstname, lastname, username, passkey, birthdate, phone) 
+                source.Open();
+                destination.Open();
+
+                var cmd = new SqlCommand("SELECT * FROM teachers", source);
+                var reader = cmd.ExecuteReader();
+
+                using (var transaction = destination.BeginTransaction())
+                {
+                    var insertCmd = new SQLiteCommand(
+                        @"INSERT INTO teachers (firstname, lastname, username, passkey, birthdate, phone) 
                   VALUES (@firstname, @lastname, @username, @passkey, @birthdate, @phone)",
-                    destination);
+                        destination);
 
-                while (reader.Read())
-                {
-                    insertCmd.Parameters.Clear();
-                    insertCmd.Parameters.AddWithValue("@firstname", reader["firstname"]);
-                    insertCmd.Parameters.AddWithValue("@lastname", reader["lastname"]);
-                    insertCmd.Parameters.AddWithValue("@username", reader["username"]);
-                    insertCmd.Parameters.AddWithValue("@passkey", reader["passkey"]);
-                    insertCmd.Parameters.AddWithValue("@birthdate", reader["birthdate"]);
-                    insertCmd.Parameters.AddWithValue("@phone", reader["phone"]);
-                    insertCmd.ExecuteNonQuery();
+                    while (reader.Read())
+                    {
+                        insertCmd.Parameters.Clear();
+                        insertCmd.Parameters.AddWithValue("@firstname", reader["firstname"]);
+                        insertCmd.Parameters.AddWithValue("@lastname", reader["lastname"]);
+                        insertCmd.Parameters.AddWithValue("@username", reader["username"]);
+                        insertCmd.Parameters.AddWithValue("@passkey", reader["passkey"]);
+                        insertCmd.Parameters.AddWithValue("@birthdate", reader["birthdate"]);
+                        insertCmd.Parameters.AddWithValue("@phone", reader["phone"]);
+                        insertCmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
                 }
-
-                transaction.Commit();
             }
         }
 
-        private void MigrateCourses(SqlConnection source, SQLiteConnection destination)
+        private void MigrateCourses()
         {
-            var cmd = new SqlCommand("SELECT * FROM courses", source);
-            var reader = cmd.ExecuteReader();
-
-            using (var transaction = destination.BeginTransaction())
+            using (var source = new SqlConnection(_sqlServerConnectionString))
+            using (var destination = new SQLiteConnection($"Data Source={_sqliteDbPath};Version=3;"))
             {
-                var insertCmd = new SQLiteCommand(
-                    @"INSERT INTO courses (title, about, duration, totalprice, monthprice) 
+                source.Open();
+                destination.Open();
+
+                var cmd = new SqlCommand("SELECT * FROM courses", source);
+                var reader = cmd.ExecuteReader();
+
+                using (var transaction = destination.BeginTransaction())
+                {
+                    var insertCmd = new SQLiteCommand(
+                        @"INSERT INTO courses (title, about, duration, totalprice, monthprice) 
               VALUES (@title, @about, @duration, @totalprice, @monthprice)",
-                    destination);
+                        destination);
 
-                while (reader.Read())
-                {
-                    insertCmd.Parameters.Clear();
-                    insertCmd.Parameters.AddWithValue("@title", reader["title"]);
-                    insertCmd.Parameters.AddWithValue("@about", reader["about"]);
-                    insertCmd.Parameters.AddWithValue("@duration", reader["duration"]);
-                    insertCmd.Parameters.AddWithValue("@totalprice", reader["totalprice"]);
-                    insertCmd.Parameters.AddWithValue("@monthprice", reader["monthprice"]);
-                    insertCmd.ExecuteNonQuery();
+                    while (reader.Read())
+                    {
+                        insertCmd.Parameters.Clear();
+                        insertCmd.Parameters.AddWithValue("@title", reader["title"]);
+                        insertCmd.Parameters.AddWithValue("@about", reader["about"]);
+                        insertCmd.Parameters.AddWithValue("@duration", reader["duration"]);
+                        insertCmd.Parameters.AddWithValue("@totalprice", reader["totalprice"]);
+                        insertCmd.Parameters.AddWithValue("@monthprice", reader["monthprice"]);
+                        insertCmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
                 }
-
-                transaction.Commit();
             }
         }
 
-        private void MigrateTeacherCourse(SqlConnection source, SQLiteConnection destination)
+        private void MigrateTeacherCourse()
         {
-            var cmd = new SqlCommand("SELECT * FROM teacher_course", source);
-            var reader = cmd.ExecuteReader();
-
-            using (var transaction = destination.BeginTransaction())
+            using (var source = new SqlConnection(_sqlServerConnectionString))
+            using (var destination = new SQLiteConnection($"Data Source={_sqliteDbPath};Version=3;"))
             {
-                var insertCmd = new SQLiteCommand(
-                    "INSERT INTO teacher_course (teacherId, courseId) VALUES (@teacherId, @courseId)",
-                    destination);
+                source.Open();
+                destination.Open();
 
-                while (reader.Read())
+                var cmd = new SqlCommand("SELECT * FROM teacher_course", source);
+                var reader = cmd.ExecuteReader();
+
+                using (var transaction = destination.BeginTransaction())
                 {
-                    insertCmd.Parameters.Clear();
-                    insertCmd.Parameters.AddWithValue("@teacherId", reader["teacherId"]);
-                    insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
-                    insertCmd.ExecuteNonQuery();
-                }
+                    var insertCmd = new SQLiteCommand(
+                        "INSERT INTO teacher_course (teacherId, courseId) VALUES (@teacherId, @courseId)",
+                        destination);
 
-                transaction.Commit();
+                    while (reader.Read())
+                    {
+                        insertCmd.Parameters.Clear();
+                        insertCmd.Parameters.AddWithValue("@teacherId", reader["teacherId"]);
+                        insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
+                        insertCmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                }
             }
         }
 
-        private void MigrateClassrooms(SqlConnection source, SQLiteConnection destination)
+        private void MigrateClassrooms()
         {
-            var cmd = new SqlCommand("SELECT * FROM classrooms", source);
-            var reader = cmd.ExecuteReader();
-
-            using (var transaction = destination.BeginTransaction())
+            using (var source = new SqlConnection(_sqlServerConnectionString))
+            using (var destination = new SQLiteConnection($"Data Source={_sqliteDbPath};Version=3;"))
             {
-                var insertCmd = new SQLiteCommand(
-                    @"INSERT INTO classrooms (room) 
-              VALUES (@room)",
-                    destination);
+                source.Open();
+                destination.Open();
 
-                while (reader.Read())
+                var cmd = new SqlCommand("SELECT * FROM classrooms", source);
+                var reader = cmd.ExecuteReader();
+
+                using (var transaction = destination.BeginTransaction())
                 {
-                    insertCmd.Parameters.Clear();
-                    insertCmd.Parameters.AddWithValue("@room", reader["room"]);
-                    insertCmd.ExecuteNonQuery();
-                }
+                    var insertCmd = new SQLiteCommand(
+                        @"INSERT INTO classrooms (room) VALUES (@room)",
+                        destination);
 
-                transaction.Commit();
+                    while (reader.Read())
+                    {
+                        insertCmd.Parameters.Clear();
+                        insertCmd.Parameters.AddWithValue("@room", reader["room"]);
+                        insertCmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                }
             }
         }
 
-        private void MigratePayments(SqlConnection source, SQLiteConnection destination)
+        private void MigratePayments()
         {
-            var cmd = new SqlCommand("SELECT * FROM payments", source);
-            var reader = cmd.ExecuteReader();
-
-            using (var transaction = destination.BeginTransaction())
+            using (var source = new SqlConnection(_sqlServerConnectionString))
+            using (var destination = new SQLiteConnection($"Data Source={_sqliteDbPath};Version=3;"))
             {
-                var insertCmd = new SQLiteCommand(
-                    @"INSERT INTO payments (clientId, courseId, amount, paymentDate) 
+                source.Open();
+                destination.Open();
+
+                var cmd = new SqlCommand("SELECT * FROM payments", source);
+                var reader = cmd.ExecuteReader();
+
+                using (var transaction = destination.BeginTransaction())
+                {
+                    var insertCmd = new SQLiteCommand(
+                        @"INSERT INTO payments (clientId, courseId, amount, paymentDate) 
               VALUES (@clientId, @courseId, @amount, @paymentDate)",
-                    destination);
+                        destination);
 
-                while (reader.Read())
-                {
-                    insertCmd.Parameters.Clear();
-                    insertCmd.Parameters.AddWithValue("@clientId", reader["clientId"]);
-                    insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
-                    insertCmd.Parameters.AddWithValue("@amount", reader["amount"]);
-                    insertCmd.Parameters.AddWithValue("@paymentDate", reader["paymentDate"]);
-                    insertCmd.ExecuteNonQuery();
+                    while (reader.Read())
+                    {
+                        insertCmd.Parameters.Clear();
+                        insertCmd.Parameters.AddWithValue("@clientId", reader["clientId"]);
+                        insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
+                        insertCmd.Parameters.AddWithValue("@amount", reader["amount"]);
+                        insertCmd.Parameters.AddWithValue("@paymentDate", reader["paymentDate"]);
+                        insertCmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
                 }
-
-                transaction.Commit();
             }
         }
 
-        private void MigrateTimetable(SqlConnection source, SQLiteConnection destination)
+        private void MigrateTimetable()
         {
-            var cmd = new SqlCommand("SELECT * FROM timetable", source);
-            var reader = cmd.ExecuteReader();
-
-            using (var transaction = destination.BeginTransaction())
+            using (var source = new SqlConnection(_sqlServerConnectionString))
+            using (var destination = new SQLiteConnection($"Data Source={_sqliteDbPath};Version=3;"))
             {
-                var insertCmd = new SQLiteCommand(
-                    @"INSERT INTO timetable (clientId, courseId, teacherId, classroomId, lessonDate) 
-              VALUES (@clientId, @courseId, @teacherId, @classroomId, @lessonDate)",
-                    destination);
+                source.Open();
+                destination.Open();
 
-                while (reader.Read())
+                var cmd = new SqlCommand("SELECT * FROM timetable", source);
+                var reader = cmd.ExecuteReader();
+
+                using (var transaction = destination.BeginTransaction())
                 {
-                    insertCmd.Parameters.Clear();
-                    insertCmd.Parameters.AddWithValue("@clientId", reader["clientId"]);
-                    insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
-                    insertCmd.Parameters.AddWithValue("@teacherId", reader["teacherId"]);
-                    insertCmd.Parameters.AddWithValue("@classroomId", reader["classroomId"]);
-                    insertCmd.Parameters.AddWithValue("@lessonDate", reader["lessonDate"]);
-                    insertCmd.ExecuteNonQuery();
-                }
+                    var insertCmd = new SQLiteCommand(
+                        @"INSERT INTO timetable (clientId, courseId, teacherId, classroomId, lessonDate) 
+              VALUES (@clientId, @courseId, @teacherId, @classroomId, @lessonDate)",
+                        destination);
 
-                transaction.Commit();
+                    while (reader.Read())
+                    {
+                        insertCmd.Parameters.Clear();
+                        insertCmd.Parameters.AddWithValue("@clientId", reader["clientId"]);
+                        insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
+                        insertCmd.Parameters.AddWithValue("@teacherId", reader["teacherId"]);
+                        insertCmd.Parameters.AddWithValue("@classroomId", reader["classroomId"]);
+                        insertCmd.Parameters.AddWithValue("@lessonDate", reader["lessonDate"]);
+                        insertCmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                }
             }
         }
     }
