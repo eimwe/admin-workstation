@@ -35,6 +35,7 @@ namespace admin_workstation.Services
                 MigrateTeachers(sqlServerConnection, sqliteConnection);
                 MigrateCourses(sqlServerConnection, sqliteConnection);
                 MigrateTeacherCourse(sqlServerConnection, sqliteConnection);
+                MigrateClassrooms(sqlServerConnection, sqliteConnection);
             }
         }
 
@@ -205,6 +206,29 @@ namespace admin_workstation.Services
                     insertCmd.Parameters.Clear();
                     insertCmd.Parameters.AddWithValue("@teacherId", reader["teacherId"]);
                     insertCmd.Parameters.AddWithValue("@courseId", reader["courseId"]);
+                    insertCmd.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+            }
+        }
+
+        private void MigrateClassrooms(SqlConnection source, SQLiteConnection destination)
+        {
+            var cmd = new SqlCommand("SELECT * FROM classrooms", source);
+            var reader = cmd.ExecuteReader();
+
+            using (var transaction = destination.BeginTransaction())
+            {
+                var insertCmd = new SQLiteCommand(
+                    @"INSERT INTO classrooms (room) 
+              VALUES (@room)",
+                    destination);
+
+                while (reader.Read())
+                {
+                    insertCmd.Parameters.Clear();
+                    insertCmd.Parameters.AddWithValue("@room", reader["room"]);
                     insertCmd.ExecuteNonQuery();
                 }
 
