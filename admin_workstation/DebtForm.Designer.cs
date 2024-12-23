@@ -69,6 +69,7 @@
             btnCloseDebtView.TabIndex = 0;
             btnCloseDebtView.Text = "Close";
             btnCloseDebtView.UseVisualStyleBackColor = true;
+            btnCloseDebtView.Click += btnCloseDebtView_Click;
             // 
             // btnExportDebtView
             // 
