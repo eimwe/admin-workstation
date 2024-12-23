@@ -39,5 +39,34 @@ namespace admin_workstation.Repositories
             }
             return (string.Empty, 0, 0);
         }
+
+        private (decimal totalPaid, DateTime lastPaymentDate) GetPaymentDetails(SQLiteConnection connection, int clientId, int courseId)
+        {
+            string sql = @"SELECT SUM(amount) as total_paid, MAX(paymentDate) as last_payment
+                  FROM payments 
+                  WHERE clientid = @clientId AND courseid = @courseId";
+
+            using (var command = new SQLiteCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@clientId", clientId);
+                command.Parameters.AddWithValue("@courseId", courseId);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        decimal totalPaid = reader.IsDBNull(reader.GetOrdinal("total_paid"))
+                            ? 0
+                            : reader.GetDecimal(reader.GetOrdinal("total_paid"));
+
+                        DateTime lastPaymentDate = reader.IsDBNull(reader.GetOrdinal("last_payment"))
+                            ? DateTime.MinValue
+                            : reader.GetDateTime(reader.GetOrdinal("last_payment"));
+
+                        return (totalPaid, lastPaymentDate);
+                    }
+                }
+            }
+            return (0, DateTime.MinValue);
+        }
     }
 }
