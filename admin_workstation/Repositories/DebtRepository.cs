@@ -69,6 +69,34 @@ namespace admin_workstation.Repositories
             return (0, DateTime.MinValue);
         }
 
+        private string GetClientName(SQLiteConnection connection, int clientId)
+        {
+            string sql = @"SELECT firstname, lastname 
+                   FROM clients 
+                   WHERE id = @clientId";
+
+            using (var command = new SQLiteCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@clientId", clientId);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        string firstName = reader.IsDBNull(reader.GetOrdinal("firstname"))
+                            ? string.Empty
+                            : reader.GetString(reader.GetOrdinal("firstname"));
+
+                        string lastName = reader.IsDBNull(reader.GetOrdinal("lastname"))
+                            ? string.Empty
+                            : reader.GetString(reader.GetOrdinal("lastname"));
+
+                        return $"{firstName} {lastName}".Trim();
+                    }
+                }
+            }
+            return string.Empty;
+        }
+
         public List<Debt> CalculateDebts()
         {
             var debts = new List<Debt>();
@@ -91,6 +119,7 @@ namespace admin_workstation.Repositories
 
                                 var courseDetails = GetCourseDetails(connection, courseId);
                                 var paymentDetails = GetPaymentDetails(connection, clientId, courseId);
+                                string clientName = GetClientName(connection, clientId);
 
                                 int monthsLate = 0;
                                 if (paymentDetails.lastPaymentDate != DateTime.MinValue)
@@ -103,6 +132,7 @@ namespace admin_workstation.Repositories
                                 var debt = new Debt
                                 {
                                     clientId = clientId,
+                                    clientName = clientName,
                                     courseId = courseId,
                                     courseTitle = courseDetails.title,
                                     totalPrice = courseDetails.totalPrice,

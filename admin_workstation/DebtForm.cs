@@ -25,7 +25,8 @@ namespace admin_workstation
         {
             DataTable dataTable = new DataTable();
 
-            dataTable.Columns.Add("Client");
+            dataTable.Columns.Add("Client ID");
+            dataTable.Columns.Add("Client Name");
             dataTable.Columns.Add("Course");
             dataTable.Columns.Add("Total Price");
             dataTable.Columns.Add("Monthly Price");
@@ -41,7 +42,8 @@ namespace admin_workstation
             {
                 var row = dataTable.NewRow();
 
-                row["Client"] = debt.clientId;
+                row["Client ID"] = debt.clientId;
+                row["Client Name"] = debt.clientName;
                 row["Course"] = debt.courseTitle;
                 row["Total Price"] = debt.totalPrice;
                 row["Monthly Price"] = debt.monthlyPrice;
