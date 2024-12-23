@@ -160,8 +160,10 @@ namespace admin_workstation
             dataTable.Columns.Add("Teacher");
             dataTable.Columns.Add("Classroom");
             dataTable.Columns.Add("Lesson Date");
+            dataTable.Columns.Add("Lesson Time");
 
             var repo = new LessonRepository();
+            repo.UpdateDatabase();
             var lessons = repo.GetLessons();
 
             foreach (var lesson in lessons)
@@ -174,6 +176,7 @@ namespace admin_workstation
                 row["Teacher"] = lesson.teacherName;
                 row["Classroom"] = lesson.classroomNumber;
                 row["Lesson Date"] = lesson.lessonDate;
+                row["Lesson Time"] = lesson.timeSlot.ToDisplayString();
 
                 dataTable.Rows.Add(row);
             }
