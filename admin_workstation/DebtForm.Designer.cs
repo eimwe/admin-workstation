@@ -80,6 +80,7 @@
             btnExportDebtView.TabIndex = 0;
             btnExportDebtView.Text = "Export";
             btnExportDebtView.UseVisualStyleBackColor = true;
+            btnExportDebtView.Click += btnExportDebtView_Click;
             // 
             // DebtForm
             // 

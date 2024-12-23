@@ -1,5 +1,6 @@
 ﻿using admin_workstation.Models;
 using admin_workstation.Repositories;
+using admin_workstation.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,6 +62,20 @@ namespace admin_workstation
         private void btnCloseDebtView_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnExportDebtView_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDebts.Rows.Count > 0)
+            {
+                var exporter = new TableExporter();
+                exporter.ExportDataGridToPdf(dataGridViewDebts, "Debts List");
+            }
+            else
+            {
+                MessageBox.Show("No data to export.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
