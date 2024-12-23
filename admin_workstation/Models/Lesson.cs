@@ -18,5 +18,6 @@ namespace admin_workstation.Models
         public int classroomId;
         public string classroomNumber = "";
         public DateTime lessonDate = DateTime.Now;
+        public TimeSlot timeSlot = TimeSlot.Slot_10_11;
     }
 }
