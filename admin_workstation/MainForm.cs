@@ -8,6 +8,7 @@ namespace admin_workstation
 {
     public partial class MainForm : Form
     {
+        private DataSearcher? clientSearchHelper;
         public MainForm()
         {
             if (!DatabaseCheck.VerifyDatabase())
@@ -20,6 +21,8 @@ namespace admin_workstation
             ReadClients();
             ReadPayments();
             ReadLessons();
+
+            clientSearchHelper = new DataSearcher(dataGridViewClients, textBoxClientSearch);
         }
 
         private void ReadClients()
@@ -132,6 +135,15 @@ namespace admin_workstation
         private void btnAddPayment_Click(object sender, EventArgs e)
         {
             AddPaymentForm form = new AddPaymentForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ReadPayments();
+            }
+        }
+
+        private void btnShowDebts_Click(object sender, EventArgs e)
+        {
+            DebtForm form = new DebtForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 ReadPayments();

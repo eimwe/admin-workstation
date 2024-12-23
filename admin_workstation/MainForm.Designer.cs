@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tabControlTables = new TabControl();
             tabPageClients = new TabPage();
+            textBoxClientSearch = new TextBox();
+            btnExportClients = new Button();
             btnPrintContract = new Button();
             dataGridViewClients = new DataGridView();
             btnCreateClient = new Button();
@@ -38,13 +40,13 @@
             btnDeleteClient = new Button();
             tabPagePayments = new TabPage();
             dataGridViewPayments = new DataGridView();
+            btnShowDebts = new Button();
             btnAddPayment = new Button();
             tabPage1 = new TabPage();
             dataGridViewTimetable = new DataGridView();
             btnAddLesson = new Button();
             btnUpdateLesson = new Button();
             btnDeleteLesson = new Button();
-            btnExportClients = new Button();
             tabControlTables.SuspendLayout();
             tabPageClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
@@ -70,6 +72,7 @@
             // 
             // tabPageClients
             // 
+            tabPageClients.Controls.Add(textBoxClientSearch);
             tabPageClients.Controls.Add(btnExportClients);
             tabPageClients.Controls.Add(btnPrintContract);
             tabPageClients.Controls.Add(dataGridViewClients);
@@ -83,6 +86,30 @@
             tabPageClients.TabIndex = 0;
             tabPageClients.Text = "Clients";
             tabPageClients.UseVisualStyleBackColor = true;
+            // 
+            // textBoxClientSearch
+            // 
+            textBoxClientSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxClientSearch.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxClientSearch.Location = new Point(68, 7);
+            textBoxClientSearch.Name = "textBoxClientSearch";
+            textBoxClientSearch.PlaceholderText = "Search for clients info...";
+            textBoxClientSearch.Size = new Size(414, 23);
+            textBoxClientSearch.TabIndex = 2;
+            // 
+            // btnExportClients
+            // 
+            btnExportClients.BackgroundImage = (Image)resources.GetObject("btnExportClients.BackgroundImage");
+            btnExportClients.BackgroundImageLayout = ImageLayout.Zoom;
+            btnExportClients.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnExportClients.Location = new Point(37, 6);
+            btnExportClients.MaximumSize = new Size(25, 25);
+            btnExportClients.MinimumSize = new Size(25, 25);
+            btnExportClients.Name = "btnExportClients";
+            btnExportClients.Size = new Size(25, 25);
+            btnExportClients.TabIndex = 0;
+            btnExportClients.UseVisualStyleBackColor = true;
+            btnExportClients.Click += btnExportClients_Click;
             // 
             // btnPrintContract
             // 
@@ -154,6 +181,7 @@
             // tabPagePayments
             // 
             tabPagePayments.Controls.Add(dataGridViewPayments);
+            tabPagePayments.Controls.Add(btnShowDebts);
             tabPagePayments.Controls.Add(btnAddPayment);
             tabPagePayments.Location = new Point(4, 30);
             tabPagePayments.Name = "tabPagePayments";
@@ -174,6 +202,19 @@
             dataGridViewPayments.RowTemplate.Height = 25;
             dataGridViewPayments.Size = new Size(762, 337);
             dataGridViewPayments.TabIndex = 1;
+            // 
+            // btnShowDebts
+            // 
+            btnShowDebts.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnShowDebts.AutoSize = true;
+            btnShowDebts.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnShowDebts.Location = new Point(581, 3);
+            btnShowDebts.Name = "btnShowDebts";
+            btnShowDebts.Size = new Size(89, 25);
+            btnShowDebts.TabIndex = 0;
+            btnShowDebts.Text = "Show Debts";
+            btnShowDebts.UseVisualStyleBackColor = true;
+            btnShowDebts.Click += btnShowDebts_Click;
             // 
             // btnAddPayment
             // 
@@ -254,20 +295,6 @@
             btnDeleteLesson.UseVisualStyleBackColor = true;
             btnDeleteLesson.Click += btnDeleteLesson_Click;
             // 
-            // btnExportClients
-            // 
-            btnExportClients.BackgroundImage = (Image)resources.GetObject("btnExportClients.BackgroundImage");
-            btnExportClients.BackgroundImageLayout = ImageLayout.Zoom;
-            btnExportClients.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnExportClients.Location = new Point(37, 6);
-            btnExportClients.MaximumSize = new Size(25, 25);
-            btnExportClients.MinimumSize = new Size(25, 25);
-            btnExportClients.Name = "btnExportClients";
-            btnExportClients.Size = new Size(25, 25);
-            btnExportClients.TabIndex = 0;
-            btnExportClients.UseVisualStyleBackColor = true;
-            btnExportClients.Click += btnExportClients_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -307,5 +334,7 @@
         private Button btnDeleteLesson;
         private Button btnPrintContract;
         private Button btnExportClients;
+        private Button btnShowDebts;
+        private TextBox textBoxClientSearch;
     }
 }
