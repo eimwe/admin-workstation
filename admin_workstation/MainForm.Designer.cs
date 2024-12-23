@@ -47,6 +47,8 @@
             btnAddLesson = new Button();
             btnUpdateLesson = new Button();
             btnDeleteLesson = new Button();
+            textBoxLessonSearch = new TextBox();
+            textBoxPaymentSearch = new TextBox();
             tabControlTables.SuspendLayout();
             tabPageClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
@@ -180,6 +182,7 @@
             // 
             // tabPagePayments
             // 
+            tabPagePayments.Controls.Add(textBoxPaymentSearch);
             tabPagePayments.Controls.Add(dataGridViewPayments);
             tabPagePayments.Controls.Add(btnShowDebts);
             tabPagePayments.Controls.Add(btnAddPayment);
@@ -231,6 +234,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(textBoxLessonSearch);
             tabPage1.Controls.Add(dataGridViewTimetable);
             tabPage1.Controls.Add(btnAddLesson);
             tabPage1.Controls.Add(btnUpdateLesson);
@@ -295,6 +299,26 @@
             btnDeleteLesson.UseVisualStyleBackColor = true;
             btnDeleteLesson.Click += btnDeleteLesson_Click;
             // 
+            // textBoxLessonSearch
+            // 
+            textBoxLessonSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxLessonSearch.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxLessonSearch.Location = new Point(56, 5);
+            textBoxLessonSearch.Name = "textBoxLessonSearch";
+            textBoxLessonSearch.PlaceholderText = "Search for lessons info...";
+            textBoxLessonSearch.Size = new Size(414, 23);
+            textBoxLessonSearch.TabIndex = 3;
+            // 
+            // textBoxPaymentSearch
+            // 
+            textBoxPaymentSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxPaymentSearch.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxPaymentSearch.Location = new Point(161, 5);
+            textBoxPaymentSearch.Name = "textBoxPaymentSearch";
+            textBoxPaymentSearch.PlaceholderText = "Search for payments info...";
+            textBoxPaymentSearch.Size = new Size(414, 23);
+            textBoxPaymentSearch.TabIndex = 4;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -336,5 +360,7 @@
         private Button btnExportClients;
         private Button btnShowDebts;
         private TextBox textBoxClientSearch;
+        private TextBox textBoxLessonSearch;
+        private TextBox textBoxPaymentSearch;
     }
 }
