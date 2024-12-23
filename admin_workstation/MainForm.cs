@@ -8,6 +8,7 @@ namespace admin_workstation
 {
     public partial class MainForm : Form
     {
+        private DataSearcher? clientSearchHelper;
         public MainForm()
         {
             if (!DatabaseCheck.VerifyDatabase())
@@ -20,6 +21,8 @@ namespace admin_workstation
             ReadClients();
             ReadPayments();
             ReadLessons();
+
+            clientSearchHelper = new DataSearcher(dataGridViewClients, textBoxClientSearch);
         }
 
         private void ReadClients()
