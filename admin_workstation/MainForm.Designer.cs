@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tabControlTables = new TabControl();
             tabPageClients = new TabPage();
+            btnExportClients = new Button();
             btnPrintContract = new Button();
             dataGridViewClients = new DataGridView();
             btnCreateClient = new Button();
@@ -44,7 +45,7 @@
             btnAddLesson = new Button();
             btnUpdateLesson = new Button();
             btnDeleteLesson = new Button();
-            btnExportClients = new Button();
+            btnShowDebts = new Button();
             tabControlTables.SuspendLayout();
             tabPageClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
@@ -83,6 +84,20 @@
             tabPageClients.TabIndex = 0;
             tabPageClients.Text = "Clients";
             tabPageClients.UseVisualStyleBackColor = true;
+            // 
+            // btnExportClients
+            // 
+            btnExportClients.BackgroundImage = (Image)resources.GetObject("btnExportClients.BackgroundImage");
+            btnExportClients.BackgroundImageLayout = ImageLayout.Zoom;
+            btnExportClients.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnExportClients.Location = new Point(37, 6);
+            btnExportClients.MaximumSize = new Size(25, 25);
+            btnExportClients.MinimumSize = new Size(25, 25);
+            btnExportClients.Name = "btnExportClients";
+            btnExportClients.Size = new Size(25, 25);
+            btnExportClients.TabIndex = 0;
+            btnExportClients.UseVisualStyleBackColor = true;
+            btnExportClients.Click += btnExportClients_Click;
             // 
             // btnPrintContract
             // 
@@ -154,6 +169,7 @@
             // tabPagePayments
             // 
             tabPagePayments.Controls.Add(dataGridViewPayments);
+            tabPagePayments.Controls.Add(btnShowDebts);
             tabPagePayments.Controls.Add(btnAddPayment);
             tabPagePayments.Location = new Point(4, 30);
             tabPagePayments.Name = "tabPagePayments";
@@ -254,19 +270,18 @@
             btnDeleteLesson.UseVisualStyleBackColor = true;
             btnDeleteLesson.Click += btnDeleteLesson_Click;
             // 
-            // btnExportClients
+            // btnShowDebts
             // 
-            btnExportClients.BackgroundImage = (Image)resources.GetObject("btnExportClients.BackgroundImage");
-            btnExportClients.BackgroundImageLayout = ImageLayout.Zoom;
-            btnExportClients.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnExportClients.Location = new Point(37, 6);
-            btnExportClients.MaximumSize = new Size(25, 25);
-            btnExportClients.MinimumSize = new Size(25, 25);
-            btnExportClients.Name = "btnExportClients";
-            btnExportClients.Size = new Size(25, 25);
-            btnExportClients.TabIndex = 0;
-            btnExportClients.UseVisualStyleBackColor = true;
-            btnExportClients.Click += btnExportClients_Click;
+            btnShowDebts.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnShowDebts.AutoSize = true;
+            btnShowDebts.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnShowDebts.Location = new Point(581, 3);
+            btnShowDebts.Name = "btnShowDebts";
+            btnShowDebts.Size = new Size(89, 25);
+            btnShowDebts.TabIndex = 0;
+            btnShowDebts.Text = "Show Debts";
+            btnShowDebts.UseVisualStyleBackColor = true;
+            btnShowDebts.Click += btnAddPayment_Click;
             // 
             // MainForm
             // 
@@ -307,5 +322,6 @@
         private Button btnDeleteLesson;
         private Button btnPrintContract;
         private Button btnExportClients;
+        private Button btnShowDebts;
     }
 }
