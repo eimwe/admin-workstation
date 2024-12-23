@@ -13,6 +13,8 @@ namespace admin_workstation.Repositories
     {
         private readonly string connectionString = DatabaseConfig.GetConnectionString();
 
+
+
         public List<Lesson> GetLessons()
         {
             var lessons = new List<Lesson>();
@@ -32,7 +34,8 @@ namespace admin_workstation.Repositories
                                     "teachers.firstName || ' ' || teachers.lastName as teacherName, " +
                                     "timetable.classroomId, " +
                                     "classrooms.room as classroomNumber, " +
-                                    "timetable.lessonDate " +
+                                    "timetable.lessonDate, " +
+                                    "timetable.timeSlot " +
                                  "FROM " +
                                     "timetable " +
                                  "JOIN clients ON timetable.clientId = clients.id " +
@@ -57,6 +60,7 @@ namespace admin_workstation.Repositories
                                 lesson.classroomId = reader.GetInt32(7);
                                 lesson.classroomNumber = reader.GetString(8);
                                 lesson.lessonDate = reader.GetDateTime(9);
+                                lesson.timeSlot = TimeSlotExtensions.FromDisplayString(reader.GetString(10));
 
                                 lessons.Add(lesson);
                             }
@@ -92,7 +96,8 @@ namespace admin_workstation.Repositories
                                 "teachers.firstName || ' ' || teachers.lastName as teacherName, " +
                                 "timetable.classroomId, " +
                                 "classrooms.room as classroomNumber, " +
-                                "timetable.lessonDate " +
+                                "timetable.lessonDate, " +
+                                "timetable.timeSlot " +
                              "FROM " +
                                 "timetable " +
                              "JOIN clients ON timetable.clientId = clients.id " +
@@ -119,6 +124,7 @@ namespace admin_workstation.Repositories
                                 lesson.classroomId = reader.GetInt32(7);
                                 lesson.classroomNumber = reader.GetString(8);
                                 lesson.lessonDate = reader.GetDateTime(9);
+                                lesson.timeSlot = TimeSlotExtensions.FromDisplayString(reader.GetString(10));
 
                                 return lesson;
                             }
@@ -143,8 +149,8 @@ namespace admin_workstation.Repositories
                 {
                     connection.Open();
                     string sql = "INSERT INTO timetable " +
-                                 "(clientId, courseId, teacherId, classroomId, lessonDate) VALUES " +
-                                 "(@clientId, @courseId, @teacherId, @classroomId, @lessonDate);";
+                                 "(clientId, courseId, teacherId, classroomId, lessonDate, timeSlot) VALUES " +
+                                 "(@clientId, @courseId, @teacherId, @classroomId, @lessonDate, @timeSlot);";
                     using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@clientId", lesson.clientId);
@@ -152,6 +158,7 @@ namespace admin_workstation.Repositories
                         command.Parameters.AddWithValue("@teacherId", lesson.teacherId);
                         command.Parameters.AddWithValue("@classroomId", lesson.classroomId);
                         command.Parameters.AddWithValue("@lessonDate", lesson.lessonDate);
+                        command.Parameters.AddWithValue("@timeSlot", lesson.timeSlot.ToDisplayString());
 
                         command.ExecuteNonQuery();
                     }
@@ -174,7 +181,7 @@ namespace admin_workstation.Repositories
                     string sql = "UPDATE timetable " +
                                  "SET clientId=@clientId, courseId=@courseId, " +
                                  "teacherId=@teacherId, classroomId=@classroomId, " +
-                                 "lessonDate=@lessonDate WHERE id=@id";
+                                 "lessonDate=@lessonDate, timeSlot=@timeSlot WHERE id=@id";
                     using (var command = new SQLiteCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@id", lesson.id);
@@ -183,6 +190,7 @@ namespace admin_workstation.Repositories
                         command.Parameters.AddWithValue("@teacherId", lesson.teacherId);
                         command.Parameters.AddWithValue("@classroomId", lesson.classroomId);
                         command.Parameters.AddWithValue("@lessonDate", lesson.lessonDate);
+                        command.Parameters.AddWithValue("@timeSlot", lesson.timeSlot.ToDisplayString());
 
                         command.ExecuteNonQuery();
                     }

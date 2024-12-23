@@ -46,6 +46,11 @@ namespace admin_workstation
             this.comboBoxLessonClassroom.DataSource = classrooms.Select(c => new { Value = c.id, Display = c.room }).ToList();
             this.comboBoxLessonClassroom.DisplayMember = "Display";
             this.comboBoxLessonClassroom.ValueMember = "Value";
+
+            this.comboBoxTimeSlot.Items.Clear();
+            this.comboBoxTimeSlot.Items.Add("10:00-11:00");
+            this.comboBoxTimeSlot.Items.Add("11:00-12:00");
+            this.comboBoxTimeSlot.SelectedIndex = 0;
         }
 
         private int lessonId = 0;
@@ -63,6 +68,7 @@ namespace admin_workstation
                 comboBoxLessonTeachers.SelectedValue = lesson.teacherId;
                 comboBoxLessonClassroom.SelectedValue = lesson.classroomId;
                 this.dateTimePickerLesson.Value = lesson.lessonDate;
+                this.comboBoxTimeSlot.SelectedItem = lesson.timeSlot.ToDisplayString();
             }
             catch (Exception ex)
             {
@@ -79,6 +85,7 @@ namespace admin_workstation
             lesson.teacherId = (int)((dynamic)this.comboBoxLessonTeachers.SelectedItem).Value;
             lesson.classroomId = (int)((dynamic)this.comboBoxLessonClassroom.SelectedItem).Value;
             lesson.lessonDate = this.dateTimePickerLesson.Value;
+            lesson.timeSlot = TimeSlotExtensions.FromDisplayString((string)this.comboBoxTimeSlot.SelectedItem);
 
             var repo = new LessonRepository();
 

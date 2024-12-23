@@ -39,10 +39,14 @@
             btnUpdateClient = new Button();
             btnDeleteClient = new Button();
             tabPagePayments = new TabPage();
+            btnExportPayments = new Button();
+            textBoxPaymentSearch = new TextBox();
             dataGridViewPayments = new DataGridView();
             btnShowDebts = new Button();
             btnAddPayment = new Button();
             tabPage1 = new TabPage();
+            btnExportLessons = new Button();
+            textBoxLessonSearch = new TextBox();
             dataGridViewTimetable = new DataGridView();
             btnAddLesson = new Button();
             btnUpdateLesson = new Button();
@@ -180,6 +184,8 @@
             // 
             // tabPagePayments
             // 
+            tabPagePayments.Controls.Add(btnExportPayments);
+            tabPagePayments.Controls.Add(textBoxPaymentSearch);
             tabPagePayments.Controls.Add(dataGridViewPayments);
             tabPagePayments.Controls.Add(btnShowDebts);
             tabPagePayments.Controls.Add(btnAddPayment);
@@ -189,6 +195,30 @@
             tabPagePayments.TabIndex = 1;
             tabPagePayments.Text = "Payments";
             tabPagePayments.UseVisualStyleBackColor = true;
+            // 
+            // btnExportPayments
+            // 
+            btnExportPayments.BackgroundImage = (Image)resources.GetObject("btnExportPayments.BackgroundImage");
+            btnExportPayments.BackgroundImageLayout = ImageLayout.Zoom;
+            btnExportPayments.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnExportPayments.Location = new Point(3, 5);
+            btnExportPayments.MaximumSize = new Size(25, 25);
+            btnExportPayments.MinimumSize = new Size(25, 25);
+            btnExportPayments.Name = "btnExportPayments";
+            btnExportPayments.Size = new Size(25, 25);
+            btnExportPayments.TabIndex = 5;
+            btnExportPayments.UseVisualStyleBackColor = true;
+            btnExportPayments.Click += btnExportPayments_Click;
+            // 
+            // textBoxPaymentSearch
+            // 
+            textBoxPaymentSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxPaymentSearch.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxPaymentSearch.Location = new Point(161, 5);
+            textBoxPaymentSearch.Name = "textBoxPaymentSearch";
+            textBoxPaymentSearch.PlaceholderText = "Search for payments info...";
+            textBoxPaymentSearch.Size = new Size(414, 23);
+            textBoxPaymentSearch.TabIndex = 4;
             // 
             // dataGridViewPayments
             // 
@@ -231,6 +261,8 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(btnExportLessons);
+            tabPage1.Controls.Add(textBoxLessonSearch);
             tabPage1.Controls.Add(dataGridViewTimetable);
             tabPage1.Controls.Add(btnAddLesson);
             tabPage1.Controls.Add(btnUpdateLesson);
@@ -241,6 +273,30 @@
             tabPage1.TabIndex = 2;
             tabPage1.Text = "Timetable";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnExportLessons
+            // 
+            btnExportLessons.BackgroundImage = (Image)resources.GetObject("btnExportLessons.BackgroundImage");
+            btnExportLessons.BackgroundImageLayout = ImageLayout.Zoom;
+            btnExportLessons.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnExportLessons.Location = new Point(3, 5);
+            btnExportLessons.MaximumSize = new Size(25, 25);
+            btnExportLessons.MinimumSize = new Size(25, 25);
+            btnExportLessons.Name = "btnExportLessons";
+            btnExportLessons.Size = new Size(25, 25);
+            btnExportLessons.TabIndex = 6;
+            btnExportLessons.UseVisualStyleBackColor = true;
+            btnExportLessons.Click += btnExportLessons_Click;
+            // 
+            // textBoxLessonSearch
+            // 
+            textBoxLessonSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxLessonSearch.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxLessonSearch.Location = new Point(56, 5);
+            textBoxLessonSearch.Name = "textBoxLessonSearch";
+            textBoxLessonSearch.PlaceholderText = "Search for lessons info...";
+            textBoxLessonSearch.Size = new Size(414, 23);
+            textBoxLessonSearch.TabIndex = 3;
             // 
             // dataGridViewTimetable
             // 
@@ -336,5 +392,9 @@
         private Button btnExportClients;
         private Button btnShowDebts;
         private TextBox textBoxClientSearch;
+        private TextBox textBoxLessonSearch;
+        private TextBox textBoxPaymentSearch;
+        private Button btnExportPayments;
+        private Button btnExportLessons;
     }
 }

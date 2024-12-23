@@ -9,6 +9,8 @@ namespace admin_workstation
     public partial class MainForm : Form
     {
         private DataSearcher? clientSearchHelper;
+        private DataSearcher? paymentSearchHelper;
+        private DataSearcher? lessonSearchHelper;
         public MainForm()
         {
             if (!DatabaseCheck.VerifyDatabase())
@@ -23,6 +25,8 @@ namespace admin_workstation
             ReadLessons();
 
             clientSearchHelper = new DataSearcher(dataGridViewClients, textBoxClientSearch);
+            paymentSearchHelper = new DataSearcher(dataGridViewPayments, textBoxPaymentSearch);
+            lessonSearchHelper = new DataSearcher(dataGridViewTimetable, textBoxLessonSearch);
         }
 
         private void ReadClients()
@@ -50,6 +54,7 @@ namespace admin_workstation
             }
 
             this.dataGridViewClients.DataSource = dataTable;
+            this.dataGridViewClients.Columns["ID"].Visible = false;
         }
 
         private void btnCreateClient_Click(object sender, EventArgs e)
@@ -130,6 +135,7 @@ namespace admin_workstation
             }
 
             this.dataGridViewPayments.DataSource = dataTable;
+            this.dataGridViewPayments.Columns["ID"].Visible = false;
         }
 
         private void btnAddPayment_Click(object sender, EventArgs e)
@@ -160,6 +166,7 @@ namespace admin_workstation
             dataTable.Columns.Add("Teacher");
             dataTable.Columns.Add("Classroom");
             dataTable.Columns.Add("Lesson Date");
+            dataTable.Columns.Add("Lesson Time");
 
             var repo = new LessonRepository();
             var lessons = repo.GetLessons();
@@ -174,11 +181,13 @@ namespace admin_workstation
                 row["Teacher"] = lesson.teacherName;
                 row["Classroom"] = lesson.classroomNumber;
                 row["Lesson Date"] = lesson.lessonDate;
+                row["Lesson Time"] = lesson.timeSlot.ToDisplayString();
 
                 dataTable.Rows.Add(row);
             }
 
             this.dataGridViewTimetable.DataSource = dataTable;
+            this.dataGridViewTimetable.Columns["ID"].Visible = false;
         }
 
         private void btnAddLesson_Click(object sender, EventArgs e)
@@ -265,6 +274,34 @@ namespace admin_workstation
             {
                 var exporter = new TableExporter();
                 exporter.ExportDataGridToPdf(dataGridViewClients, "Clients List");
+            }
+            else
+            {
+                MessageBox.Show("No data to export.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnExportPayments_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPayments.Rows.Count > 0)
+            {
+                var exporter = new TableExporter();
+                exporter.ExportDataGridToPdf(dataGridViewPayments, "Payments List");
+            }
+            else
+            {
+                MessageBox.Show("No data to export.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnExportLessons_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewTimetable.Rows.Count > 0)
+            {
+                var exporter = new TableExporter();
+                exporter.ExportDataGridToPdf(dataGridViewTimetable, "Timetable");
             }
             else
             {
