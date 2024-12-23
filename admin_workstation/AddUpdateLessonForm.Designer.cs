@@ -42,6 +42,8 @@
             comboBoxLessonCourses = new ComboBox();
             comboBoxLessonClients = new ComboBox();
             dateTimePickerLesson = new DateTimePicker();
+            label6 = new Label();
+            comboBoxTimeSlot = new ComboBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,8 +61,10 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Controls.Add(comboBoxTimeSlot);
             panel1.Controls.Add(btnSaveLesson);
             panel1.Controls.Add(btnCancelLesson);
+            panel1.Controls.Add(label6);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label4);
@@ -99,7 +103,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(36, 152);
+            label5.Location = new Point(36, 136);
             label5.Name = "label5";
             label5.Size = new Size(34, 15);
             label5.TabIndex = 3;
@@ -108,7 +112,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(36, 122);
+            label1.Location = new Point(36, 106);
             label1.Name = "label1";
             label1.Size = new Size(66, 15);
             label1.TabIndex = 3;
@@ -117,7 +121,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(36, 93);
+            label4.Location = new Point(36, 77);
             label4.Name = "label4";
             label4.Size = new Size(50, 15);
             label4.TabIndex = 3;
@@ -126,7 +130,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(36, 64);
+            label3.Location = new Point(36, 48);
             label3.Name = "label3";
             label3.Size = new Size(47, 15);
             label3.TabIndex = 3;
@@ -135,7 +139,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(36, 35);
+            label2.Location = new Point(36, 19);
             label2.Name = "label2";
             label2.Size = new Size(41, 15);
             label2.TabIndex = 3;
@@ -144,7 +148,7 @@
             // comboBoxLessonClassroom
             // 
             comboBoxLessonClassroom.FormattingEnabled = true;
-            comboBoxLessonClassroom.Location = new Point(105, 119);
+            comboBoxLessonClassroom.Location = new Point(105, 103);
             comboBoxLessonClassroom.Name = "comboBoxLessonClassroom";
             comboBoxLessonClassroom.Size = new Size(249, 23);
             comboBoxLessonClassroom.TabIndex = 2;
@@ -152,7 +156,7 @@
             // comboBoxLessonTeachers
             // 
             comboBoxLessonTeachers.FormattingEnabled = true;
-            comboBoxLessonTeachers.Location = new Point(105, 90);
+            comboBoxLessonTeachers.Location = new Point(105, 74);
             comboBoxLessonTeachers.Name = "comboBoxLessonTeachers";
             comboBoxLessonTeachers.Size = new Size(249, 23);
             comboBoxLessonTeachers.TabIndex = 2;
@@ -160,7 +164,7 @@
             // comboBoxLessonCourses
             // 
             comboBoxLessonCourses.FormattingEnabled = true;
-            comboBoxLessonCourses.Location = new Point(105, 61);
+            comboBoxLessonCourses.Location = new Point(105, 45);
             comboBoxLessonCourses.Name = "comboBoxLessonCourses";
             comboBoxLessonCourses.Size = new Size(249, 23);
             comboBoxLessonCourses.TabIndex = 2;
@@ -168,17 +172,34 @@
             // comboBoxLessonClients
             // 
             comboBoxLessonClients.FormattingEnabled = true;
-            comboBoxLessonClients.Location = new Point(105, 32);
+            comboBoxLessonClients.Location = new Point(105, 16);
             comboBoxLessonClients.Name = "comboBoxLessonClients";
             comboBoxLessonClients.Size = new Size(249, 23);
             comboBoxLessonClients.TabIndex = 1;
             // 
             // dateTimePickerLesson
             // 
-            dateTimePickerLesson.Location = new Point(105, 148);
+            dateTimePickerLesson.Location = new Point(105, 132);
             dateTimePickerLesson.Name = "dateTimePickerLesson";
             dateTimePickerLesson.Size = new Size(249, 23);
             dateTimePickerLesson.TabIndex = 4;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(36, 164);
+            label6.Name = "label6";
+            label6.Size = new Size(36, 15);
+            label6.TabIndex = 3;
+            label6.Text = "Time:";
+            // 
+            // comboBoxTimeSlot
+            // 
+            comboBoxTimeSlot.FormattingEnabled = true;
+            comboBoxTimeSlot.Location = new Point(105, 161);
+            comboBoxTimeSlot.Name = "comboBoxTimeSlot";
+            comboBoxTimeSlot.Size = new Size(249, 23);
+            comboBoxTimeSlot.TabIndex = 7;
             // 
             // AddUpdateLessonForm
             // 
@@ -210,5 +231,7 @@
         private Label label1;
         private ComboBox comboBoxLessonClassroom;
         private ComboBox comboBoxLessonTeachers;
+        private ComboBox comboBoxTimeSlot;
+        private Label label6;
     }
 }
