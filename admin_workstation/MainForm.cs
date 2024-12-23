@@ -281,5 +281,33 @@ namespace admin_workstation
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btnExportPayments_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPayments.Rows.Count > 0)
+            {
+                var exporter = new TableExporter();
+                exporter.ExportDataGridToPdf(dataGridViewPayments, "Payments List");
+            }
+            else
+            {
+                MessageBox.Show("No data to export.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnExportLessons_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewTimetable.Rows.Count > 0)
+            {
+                var exporter = new TableExporter();
+                exporter.ExportDataGridToPdf(dataGridViewTimetable, "Timetable");
+            }
+            else
+            {
+                MessageBox.Show("No data to export.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }
