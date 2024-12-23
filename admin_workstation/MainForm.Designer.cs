@@ -281,7 +281,7 @@
             btnShowDebts.TabIndex = 0;
             btnShowDebts.Text = "Show Debts";
             btnShowDebts.UseVisualStyleBackColor = true;
-            btnShowDebts.Click += btnAddPayment_Click;
+            btnShowDebts.Click += btnShowDebts_Click;
             // 
             // MainForm
             // 

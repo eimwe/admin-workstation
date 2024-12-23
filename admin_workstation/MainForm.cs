@@ -138,6 +138,15 @@ namespace admin_workstation
             }
         }
 
+        private void btnShowDebts_Click(object sender, EventArgs e)
+        {
+            DebtForm form = new DebtForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ReadPayments();
+            }
+        }
+
         private void ReadLessons()
         {
             DataTable dataTable = new DataTable();
