@@ -9,6 +9,7 @@ namespace admin_workstation.Models
     public class Debt
     {
         public int clientId;
+        public string clientName = "";
         public int courseId;
         public string courseTitle = "";
         public decimal totalPrice = 0;
