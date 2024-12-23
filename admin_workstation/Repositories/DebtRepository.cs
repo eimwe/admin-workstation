@@ -68,5 +68,63 @@ namespace admin_workstation.Repositories
             }
             return (0, DateTime.MinValue);
         }
+
+        public List<Debt> CalculateDebts()
+        {
+            var debts = new List<Debt>();
+
+            try
+            {
+                using (var connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string sql = "SELECT DISTINCT clientId, courseId FROM payments";
+                    using (var command = new SQLiteCommand(sql, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int clientId = Convert.ToInt32(reader["clientId"]);
+                                int courseId = Convert.ToInt32(reader["courseId"]);
+
+                                var courseDetails = GetCourseDetails(connection, courseId);
+                                var paymentDetails = GetPaymentDetails(connection, clientId, courseId);
+
+                                int monthsLate = 0;
+                                if (paymentDetails.lastPaymentDate != DateTime.MinValue)
+                                {
+                                    var monthsSinceLastPayment = (DateTime.Now - paymentDetails.lastPaymentDate).Days / 30;
+                                    var expectedPayments = Math.Ceiling(paymentDetails.totalPaid / courseDetails.monthlyPrice);
+                                    monthsLate = (int)Math.Max(0, monthsSinceLastPayment - expectedPayments);
+                                }
+
+                                var debt = new Debt
+                                {
+                                    clientId = clientId,
+                                    courseId = courseId,
+                                    courseTitle = courseDetails.title,
+                                    totalPrice = courseDetails.totalPrice,
+                                    monthlyPrice = courseDetails.monthlyPrice,
+                                    totalPaid = paymentDetails.totalPaid,
+                                    remainingDebt = courseDetails.totalPrice - paymentDetails.totalPaid,
+                                    lastPaymentDate = paymentDetails.lastPaymentDate,
+                                    monthsLate = monthsLate
+                                };
+
+                                debts.Add(debt);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+
+            return debts;
+        }
     }
 }
