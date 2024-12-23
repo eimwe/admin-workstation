@@ -50,6 +50,7 @@ namespace admin_workstation
             }
 
             this.dataGridViewClients.DataSource = dataTable;
+            this.dataGridViewClients.Columns["ID"].Visible = false;
         }
 
         private void btnCreateClient_Click(object sender, EventArgs e)
@@ -130,6 +131,7 @@ namespace admin_workstation
             }
 
             this.dataGridViewPayments.DataSource = dataTable;
+            this.dataGridViewPayments.Columns["ID"].Visible = false;
         }
 
         private void btnAddPayment_Click(object sender, EventArgs e)
@@ -181,6 +183,7 @@ namespace admin_workstation
             }
 
             this.dataGridViewTimetable.DataSource = dataTable;
+            this.dataGridViewTimetable.Columns["ID"].Visible = false;
         }
 
         private void btnAddLesson_Click(object sender, EventArgs e)
