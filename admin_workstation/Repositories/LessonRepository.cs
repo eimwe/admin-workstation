@@ -225,52 +225,5 @@ namespace admin_workstation.Repositories
                 Console.WriteLine("Exception: " + ex.ToString());
             }
         }
-
-        public void UpdateDatabase()
-        {
-            using (var connection = new SQLiteConnection(connectionString))
-            {
-                connection.Open();
-
-                // Add timeSlot column
-                string alterTableSql = @"
-                ALTER TABLE timetable 
-                ADD COLUMN timeSlot TEXT DEFAULT '10:00-11:00';
-            ";
-
-                // Update existing records based on lessonDate time
-                string updateRecordsSql = @"
-                UPDATE timetable
-                SET timeSlot = 
-                    CASE 
-                        WHEN strftime('%H:%M', lessonDate) < '11:00' THEN '10:00-11:00'
-                        ELSE '11:00-12:00'
-                    END;
-            ";
-
-                // Update lessonDate to store date only
-                string updateDateSql = @"
-                UPDATE timetable
-                SET lessonDate = date(lessonDate);
-            ";
-
-                using (var command = new SQLiteCommand(alterTableSql, connection))
-                {
-                    try
-                    {
-                        command.ExecuteNonQuery();
-                        command.CommandText = updateRecordsSql;
-                        command.ExecuteNonQuery();
-                        command.CommandText = updateDateSql;
-                        command.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Database update error: {ex.Message}");
-                        throw;
-                    }
-                }
-            }
-        }
     }
 }

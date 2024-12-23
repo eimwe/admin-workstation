@@ -163,7 +163,6 @@ namespace admin_workstation
             dataTable.Columns.Add("Lesson Time");
 
             var repo = new LessonRepository();
-            repo.UpdateDatabase();
             var lessons = repo.GetLessons();
 
             foreach (var lesson in lessons)
